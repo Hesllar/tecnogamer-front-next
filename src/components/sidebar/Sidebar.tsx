@@ -1,0 +1,57 @@
+import { SidebarMenuItem } from "./SidebarMenuItem";
+
+import { IoMdCube, IoIosKeypad} from 'react-icons/io';
+
+
+
+const sidebar = [
+  {
+    name:'Dashboard',
+    icon:<IoIosKeypad size={40}/>,
+    path:'/dashboard/main'
+  },
+  {
+    name:'Products',
+    icon: <IoMdCube size={40}/>,
+    path:'/dashboard/products'
+  }
+];
+
+
+
+export const Sidebar = () => {
+  return (
+    <div
+      id="sidebar"
+      className="bg-white h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+      x-show="sidenav"
+    >
+      <div className="space-y-6 md:space-y-10 mt-10">
+        <h1 className="hidden md:block font-bold text-sm md:text-xl text-center">
+          Dashwind<span className="text-teal-600">.</span>
+        </h1>
+        <div id="profile" className="space-y-3">
+          <img
+            src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+            alt="Avatar user"
+            className="w-10 md:w-16 rounded-full mx-auto"
+          />
+          <div>
+            <h2
+              className="font-medium text-xs md:text-sm text-center text-teal-500"
+            >
+              Eduard Pantazi
+            </h2>
+            <p className="text-xs text-gray-500 text-center">Administrator</p>
+          </div>
+        </div>
+        <div id="menu" className="flex flex-col space-y-2">
+     
+          {
+            sidebar.map(item => (<SidebarMenuItem key={item.path} {...item}/>))
+          }
+        </div>
+      </div>
+    </div >
+  )
+}
