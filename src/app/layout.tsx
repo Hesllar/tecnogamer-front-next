@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} h-screen overflow-hidden`}>
+        {children}
+      </body>
     </html>
   );
 }

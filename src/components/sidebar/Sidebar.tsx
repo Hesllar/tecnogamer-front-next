@@ -1,29 +1,25 @@
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
-import { IoMdCube, IoIosKeypad} from 'react-icons/io';
-
-
+import { IoMdCube, IoIosKeypad } from "react-icons/io";
 
 const sidebar = [
   {
-    name:'Dashboard',
-    icon:<IoIosKeypad size={40}/>,
-    path:'/dashboard/main'
+    name: "Inicio",
+    icon: <IoIosKeypad size={40} />,
+    path: "/dashboard/main",
   },
   {
-    name:'Products',
-    icon: <IoMdCube size={40}/>,
-    path:'/dashboard/products'
-  }
+    name: "Productos",
+    icon: <IoMdCube size={40} />,
+    path: "/dashboard/products",
+  },
 ];
-
-
 
 export const Sidebar = () => {
   return (
     <div
       id="sidebar"
-      className="bg-white h-screen md:block shadow-xl px-3 w-30 md:w-60 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+      className="bg-white h-screen md:block shadow-xl px-3 w-32 md:w-60 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
       x-show="sidenav"
     >
       <div className="space-y-6 md:space-y-10 mt-10">
@@ -37,21 +33,18 @@ export const Sidebar = () => {
             className="w-10 md:w-16 rounded-full mx-auto"
           />
           <div>
-            <h2
-              className="font-medium text-xs md:text-sm text-center text-teal-500"
-            >
+            <h2 className="font-medium text-xs md:text-xl text-center text-teal-500">
               Eduard Pantazi
             </h2>
-            <p className="text-xs text-gray-500 text-center">Administrator</p>
+            <p className="text-md text-gray-500 text-center">Administrator</p>
           </div>
         </div>
         <div id="menu" className="flex flex-col space-y-2">
-     
-          {
-            sidebar.map(item => (<SidebarMenuItem key={item.path} {...item}/>))
-          }
+          {sidebar.map((item) => (
+            <SidebarMenuItem key={item.path} {...item} />
+          ))}
         </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};

@@ -1,17 +1,14 @@
 import { Sidebar } from "@/components";
 
 export default function DashboardLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-3">
+    <div className="flex">
       <Sidebar />
-      <div className="w-full">
-        { children }
-      </div>
+      <div className="flex-1 p-5 overflow-y-auto h-screen">{children}</div>
     </div>
-
   );
 }
