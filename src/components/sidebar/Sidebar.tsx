@@ -6,7 +6,7 @@ const sidebar = [
   {
     name: "Inicio",
     icon: <IoIosKeypad size={40} />,
-    path: "/dashboard/main",
+    path: "/",
   },
   {
     name: "Productos",

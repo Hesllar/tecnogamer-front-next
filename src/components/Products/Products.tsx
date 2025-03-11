@@ -1,4 +1,4 @@
-import productsData from "../../data/products.json";
+import { Products as Iproducts } from "@/interfaces/products";
 import {
   amdRyzen5800,
   amdRyzen9900,
@@ -8,6 +8,10 @@ import {
 
 import { ProductItem } from "./ProductItem";
 
+interface Props {
+  products: Iproducts[];
+}
+
 const imageData: { [key: number]: any } = {
   0: amdRyzen5800,
   1: amdRyzen9900,
@@ -15,19 +19,17 @@ const imageData: { [key: number]: any } = {
   3: intelCoreUltra265K,
 };
 
-export const Products = () => {
-  const { productos } = productsData;
-
+export const Products = ({ products = [] }: Props) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
-      {productos.map((producto, index) => (
+      {products.map((product, index) => (
         <ProductItem
-          key={producto.id}
-          id={producto.id}
-          nombre={producto.nombre}
-          descripcion={producto.descripcion}
-          categoria={producto.categoria}
-          precio={producto.precio}
+          key={product.id}
+          id={product.id}
+          name={product.name}
+          description={product.description}
+          category={product.category}
+          price={product.price}
           image={imageData[index]}
         />
       ))}

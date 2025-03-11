@@ -1,35 +1,35 @@
 {
-  "productos": [
+  "products": [
     {
       "id": 1,
-      "nombre": "Procesador AMD Ryzen 7 5800X",
-      "descripcion": "Procesador Ryzen 7 5800X 8-Core 16 Hilos AM4 3,8Ghz- 4,7Ghz",
-      "categoria": "Procesadores",
-      "precio": 229900,
+      "name": "Procesador AMD Ryzen 7 5800X",
+      "description": "Procesador Ryzen 7 5800X 8-Core 16 Hilos AM4 3,8Ghz- 4,7Ghz",
+      "category": "Procesadores",
+      "price": 229900,
       "stock": 25
     },
     {
       "id": 2,
-      "nombre": "Procesador AMD Ryzen 9 9900X",
-      "descripcion": "Procesador 4.4GHz(5.6GHz Turbo), 12Core/24Hilos, Socket AM5, Gráficos Radeon",
-      "categoria": "Procesadores",
-      "precio": 599990,
+      "name": "Procesador AMD Ryzen 9 9900X",
+      "description": "Procesador 4.4GHz(5.6GHz Turbo), 12Core/24Hilos, Socket AM5, Gráficos Radeon",
+      "category": "Procesadores",
+      "price": 599990,
       "stock": 18
     },
     {
       "id": 3,
-      "nombre": "Procesador Intel Core i5-11400",
-      "descripcion": "Procesador de 2.6-4.4GHz Turbo 12MB 6 Núcleos LGA1200 c/Gra/FAN",
-      "categoria": "Procesadores",
-      "precio": 339990,
+      "name": "Procesador Intel Core i5-11400",
+      "description": "Procesador de 2.6-4.4GHz Turbo 12MB 6 Núcleos LGA1200 c/Gra/FAN",
+      "category": "Procesadores",
+      "price": 339990,
       "stock": 42
     },
     {
       "id": 4,
-      "nombre": "Procesador Intel Core Ultra 7 265K",
-      "descripcion": "Procesador LGA1851, 3.3/5.5 GHz, 8 P-cores, 12 E-cores, 30MB Cache",
-      "categoria": "Procesadores",
-      "precio": 459900,
+      "name": "Procesador Intel Core Ultra 7 265K",
+      "description": "Procesador LGA1851, 3.3/5.5 GHz, 8 P-cores, 12 E-cores, 30MB Cache",
+      "category": "Procesadores",
+      "price": 459900,
       "stock": 37
     }
   ]
