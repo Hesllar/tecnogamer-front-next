@@ -11,7 +11,7 @@ const sidebar = [
   {
     name: "Productos",
     icon: <IoMdCube size={40} />,
-    path: "/dashboard/products",
+    path: "/products",
   },
 ];
 
@@ -19,7 +19,7 @@ export const Sidebar = () => {
   return (
     <div
       id="sidebar"
-      className="bg-white h-screen md:block shadow-xl px-3 w-32 md:w-60 lg:w-80 overflow-x-hidden transition-transform duration-300 ease-in-out"
+      className="hidden bg-white h-screen shadow-xl px-3 w-32 overflow-x-hidden transition-transform duration-300 ease-in-out md:block md:w-60 lg:w-80 "
       x-show="sidenav"
     >
       <div className="space-y-6 md:space-y-10 mt-10">
