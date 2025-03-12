@@ -1,33 +1,22 @@
-"use client";
-
 import Link from "next/link";
-import { useContext } from "react";
-// import { UIContext } from "../ui/context/UIContext";
+import { IoIosKeypad, IoMdCube } from "react-icons/io";
+import { SidebarMenuItem } from "../sidebar/SidebarMenuItem";
 
-interface Props {
-  flexDirection?: flexDirection;
-}
-
-type flexDirection = "flex-row" | "flex-col";
-
-const navItems = [
+const sidebar = [
   {
-    name: "Incio",
+    name: "Inicio",
+    icon: <IoIosKeypad size={40} />,
     path: "/",
   },
+  {
+    name: "Productos",
+    icon: <IoMdCube size={40} />,
+    path: "/products",
+  },
 ];
-
-export const NavItems = ({ flexDirection }: Props) => {
-  // const { onToggleMenu, isOpenMenu } = useContext(UIContext);
-
-  // const handleOnClick = () => {
-  //   if (isOpenMenu) {
-  //     onToggleMenu();
-  //   }
-  // };
-
+export const NavItems = () => {
   return (
-    <div className={`flex ${flexDirection}`}>
+    <div className="flex flex-col fixed w-full  md:hidden top-14">
       {/* {navItems.map((item) => (
         <Link
           href={item.path}
@@ -38,6 +27,9 @@ export const NavItems = ({ flexDirection }: Props) => {
           {item.name}
         </Link>
       ))} */}
+      {sidebar.map((item) => (
+        <SidebarMenuItem key={item.path} {...item} />
+      ))}
     </div>
   );
 };

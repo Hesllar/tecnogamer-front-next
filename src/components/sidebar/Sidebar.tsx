@@ -23,9 +23,6 @@ export const Sidebar = () => {
       x-show="sidenav"
     >
       <div className="space-y-6 md:space-y-10 mt-10">
-        <h1 className="hidden md:block font-bold text-sm md:text-xl text-center">
-          Dashwind<span className="text-teal-600">.</span>
-        </h1>
         <div id="profile" className="space-y-3">
           <img
             src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"

@@ -3,10 +3,10 @@ import { gabinete, gpu, ramMemory, procesador } from "../../../public/index";
 
 export default function ProductPage() {
   return (
-    <div className="flex flex-col gap-8 items-center pt-8">
+    <div className="flex flex-col gap-8 items-center pt-12 md:pt-8">
       <h1 className="text-4xl font-bold text-center">Productos</h1>
       <div className="grid grid-cols-1 2xl:grid-cols-2 min-[1921px]:grid-cols-4 gap-28 items-center">
-        <div className="shadow-2xl rounded-lg max-w-md items-center cursor-pointer">
+        <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md items-center cursor-pointer">
           <div className="w-full flex justify-center items-center">
             <Image src={gabinete} alt="gabinete" className="w-full" />
           </div>
@@ -16,7 +16,7 @@ export default function ProductPage() {
             </button>
           </div>
         </div>
-        <div className="shadow-2xl rounded-lg max-w-md items-center cursor-pointer">
+        <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md  items-center cursor-pointer">
           <div className="w-full flex justify-center items-center">
             <Image src={gpu} alt="gpu" className="w-full" />
           </div>
@@ -26,7 +26,7 @@ export default function ProductPage() {
             </button>
           </div>
         </div>
-        <div className="shadow-2xl rounded-lg max-w-md items-center cursor-pointer">
+        <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md  items-center cursor-pointer">
           <div className="w-full flex justify-center items-center">
             <Image src={ramMemory} alt="ramMemory" className="w-full" />
           </div>
@@ -36,7 +36,7 @@ export default function ProductPage() {
             </button>
           </div>
         </div>
-        <div className="shadow-2xl rounded-lg max-w-md items-center cursor-pointer">
+        <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md  items-center cursor-pointer">
           <div className="w-full flex justify-center items-center">
             <Image src={procesador} alt="procesador" className="w-full" />
           </div>
