@@ -2,33 +2,32 @@ import Link from "next/link";
 import { IoIosKeypad, IoMdCube } from "react-icons/io";
 import { SidebarMenuItem } from "../sidebar/SidebarMenuItem";
 
-const sidebar = [
+const items = [
   {
     name: "Inicio",
-    icon: <IoIosKeypad size={40} />,
+    icon: <IoIosKeypad size={10} />,
     path: "/",
   },
   {
     name: "Productos",
-    icon: <IoMdCube size={40} />,
+    icon: <IoMdCube size={10} />,
     path: "/products",
   },
 ];
 export const NavItems = () => {
   return (
-    <div className="flex flex-col fixed w-full  md:hidden top-14">
-      {/* {navItems.map((item) => (
-        <Link
-          href={item.path}
-          className="text-white py-2 sm:pr-4 sm:pl-3 hover:text-dark-primary cursor-pointer font-serif font-semibold sm:font-normal text-sm sm:text-xl dark:hover:text-primary"
-          key={item.name}
-          onClick={handleOnClick}
-        >
-          {item.name}
-        </Link>
-      ))} */}
-      {sidebar.map((item) => (
-        <SidebarMenuItem key={item.path} {...item} />
+    <div className="flex flex-col fixed w-full top-14 n bg-slate-200 text-center transform transition-all duration-600 translate-y-[0%] md:hidde">
+      {items.map((item, index) => (
+        <>
+          <Link href={item.path} className="p-2">
+            {item.name}
+          </Link>
+          <hr
+            className={
+              items.length - (index + 1) !== 0 ? "border-black" : undefined
+            }
+          />
+        </>
       ))}
     </div>
   );

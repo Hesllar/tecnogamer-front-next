@@ -25,8 +25,8 @@ export const Nav = () => {
             className="block cursor-pointer text-black md:hidden"
           />
         </div>
-        {openNavItems && <NavItems />}
       </nav>
+      {openNavItems && <NavItems />}
     </>
   );
 };
