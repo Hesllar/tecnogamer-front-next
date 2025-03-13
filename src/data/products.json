@@ -1,5 +1,5 @@
 {
-  "products": [
+  "highProducts": [
     {
       "id": 1,
       "name": "Procesador AMD Ryzen 7 5800X",
@@ -31,6 +31,48 @@
       "category": "Procesadores",
       "price": 459900,
       "stock": 37
+    }
+  ],
+  "towers": [
+    {
+      "id": 1,
+      "name": "Cougar MX360 RGB",
+      "description": "La compacta disposición de MX360 RGB permite instalar seis ventiladores, un radiador de refrigeración por agua de 360 mm y un CPU cooler de 170 mm.",
+      "category": "Gabinetes",
+      "price": 89990,
+      "stock": 15
+    },
+    {
+      "id": 2,
+      "name": "Cougar Gemini X",
+      "description": "Gabinete ATX Mid Tower con alto flujo de aire, panel frontal perforado y vidrio templado",
+      "category": "Gabinetes",
+      "price": 104990,
+      "stock": 8
+    },
+    {
+      "id": 3,
+      "name": "NZXT H6 Flow - Black",
+      "description": "Gabinete premium ATX con diseño dual chamber, paneles de vidrio templado y múltiples opciones de refrigeración",
+      "category": "Gabinetes",
+      "price": 149990,
+      "stock": 5
+    },
+    {
+      "id": 4,
+      "name": "Lian Li Lancool 216 - Black RGB",
+      "description": "Gabinete ATX Mid Tower con panel frontal mesh de alto rendimiento y 2 ventiladores ARGB",
+      "category": "Gabinetes",
+      "price": 79990,
+      "stock": 12
+    },
+    {
+      "id": 5,
+      "name": "Lian Li ODYSSEY X - Silver (TR-01A)",
+      "description": "Gabinete compacto ATX con panel frontal mesh, vidrio templado tintado y excelente flujo de aire",
+      "category": "Gabinetes",
+      "price": 94990,
+      "stock": 7
     }
   ]
 }

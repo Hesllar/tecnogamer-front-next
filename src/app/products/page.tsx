@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gabinete, gpu, ramMemory, procesador } from "../../../public/index";
+import Link from "next/link";
 
 export default function ProductPage() {
   return (
@@ -7,14 +8,16 @@ export default function ProductPage() {
       <h1 className="text-4xl font-bold text-center">Productos</h1>
       <div className="grid grid-cols-1 2xl:grid-cols-2 min-[1921px]:grid-cols-4 gap-28 items-center">
         <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md items-center cursor-pointer">
-          <div className="w-full flex justify-center items-center">
-            <Image src={gabinete} alt="gabinete" className="w-full" />
-          </div>
-          <div className=" text-center">
-            <button className="w-full rounded-b-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Ir a gabinetes
-            </button>
-          </div>
+          <Link href="/products/towers">
+            <div className="w-full flex justify-center items-center">
+              <Image src={gabinete} alt="gabinete" className="w-full" />
+            </div>
+            <div className=" text-center">
+              <button className="w-full rounded-b-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Ir a gabinetes
+              </button>
+            </div>
+          </Link>
         </div>
         <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md  items-center cursor-pointer">
           <div className="w-full flex justify-center items-center">
