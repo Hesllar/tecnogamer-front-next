@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { NavItems } from "./NavItems";
 
 export const Nav = () => {
+  //! TODO: remplazar manejador de estado por Zustand
   const [openNavItems, setOpenNavItems] = useState(false);
   const handleOnClick = () => {
     setOpenNavItems(!openNavItems);
@@ -26,7 +27,7 @@ export const Nav = () => {
           />
         </div>
       </nav>
-      {openNavItems && <NavItems />}
+      {openNavItems && <NavItems setOpenNavItems={setOpenNavItems} />}
     </>
   );
 };

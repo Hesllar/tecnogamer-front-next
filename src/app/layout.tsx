@@ -23,7 +23,7 @@ export default function RootLayout({
           <Sidebar />
           <div className="flex-1 overflow-y-auto h-screen">
             <Nav />
-            <div className="px-0 py-5 md:p-5">{children}</div>
+            <div className="px-0 py-10 md:p-5">{children}</div>
           </div>
         </div>
       </body>
