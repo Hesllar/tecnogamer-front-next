@@ -1,13 +1,10 @@
-import { highProducts } from "../data/products.json";
+import dataJson from "../data/products.json";
 
 import { Products } from "@/components/Products/Products";
-
-import {
-  amdRyzen5800,
-  amdRyzen9900,
-  intelCore11400,
-  intelCoreUltra265K,
-} from "../../public/index";
+import amdRyzen5800 from "../../public/image/procesadores/AMD_RYZEN_7_5800X.webp";
+import amdRyzen9900 from "../../public/image/procesadores/AMD_REYZEN_9_9900X.webp";
+import intelCore11400 from "../../public/image/procesadores/INTEL_CORE_5_11400.webp";
+import intelCoreUltra265K from "../../public/image/procesadores/INTEL_CORE_ULTRA_7_265K.webp";
 
 export default function Home() {
   const imagesData: { [key: number]: any } = {
@@ -17,7 +14,7 @@ export default function Home() {
     3: intelCoreUltra265K,
   };
 
-  const highProductsMapper = highProducts.map((product, index) => ({
+  const highProductsMapper = dataJson.highProducts.map((product, index) => ({
     ...product,
     image: imagesData[index],
   }));

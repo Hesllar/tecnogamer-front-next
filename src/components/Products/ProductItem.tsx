@@ -15,7 +15,7 @@ export const ProductItem = ({
 }: Props) => {
   return (
     <div className=" bg-white shadow-md rounded-lg max-w-xs items-center ">
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex justify-center items-center min-h-52">
         <Image
           src={image}
           alt={name}

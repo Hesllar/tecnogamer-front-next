@@ -74,5 +74,47 @@
       "price": 94990,
       "stock": 7
     }
+  ],
+  "ramMemory": [
+    {
+      "id": 1,
+      "name": "Memoria RAM Corsair Vengeance RGB Pro 16GB",
+      "description": "Kit de memoria DDR4 2x8GB 3200MHz CL16 con iluminación RGB personalizable",
+      "category": "Memorias RAM",
+      "price": 79990,
+      "stock": 23
+    },
+    {
+      "id": 2,
+      "name": "Memoria RAM G.Skill Trident Z RGB 32GB",
+      "description": "Kit de memoria DDR4 2x16GB 3600MHz CL16 con disipador de calor y RGB",
+      "category": "Memorias RAM",
+      "price": 139990,
+      "stock": 15
+    },
+    {
+      "id": 3,
+      "name": "Memoria RAM Kingston FURY Beast 16GB",
+      "description": "Kit de memoria DDR5 2x8GB 5200MHz CL40 para plataformas de última generación",
+      "category": "Memorias RAM",
+      "price": 89990,
+      "stock": 18
+    },
+    {
+      "id": 4,
+      "name": "Memoria RAM Crucial Ballistix 32GB",
+      "description": "Kit de memoria DDR4 2x16GB 3200MHz CL16 optimizada para overclocking",
+      "category": "Memorias RAM",
+      "price": 129990,
+      "stock": 10
+    },
+    {
+      "id": 5,
+      "name": "Memoria RAM ADATA XPG Spectrix D50 16GB",
+      "description": "Kit de memoria DDR4 2x8GB 3600MHz CL18 con iluminación RGB y disipador de aluminio",
+      "category": "Memorias RAM",
+      "price": 84990,
+      "stock": 20
+    }
   ]
 }

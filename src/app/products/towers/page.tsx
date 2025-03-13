@@ -1,12 +1,10 @@
-import { towers } from "../../../data/products.json";
+import dataJson from "../../../data/products.json";
 import { Products } from "@/components/Products/Products";
-import {
-  gabinete1,
-  gabinete2,
-  gabinete3,
-  gabinete4,
-  gabinete5,
-} from "../../../../public/index";
+import gabinete1 from "../../../../public/image/gabinetes/gabinete1.webp";
+import gabinete2 from "../../../../public/image/gabinetes/gabinete2.webp";
+import gabinete3 from "../../../../public/image/gabinetes/gabinete3.webp";
+import gabinete4 from "../../../../public/image/gabinetes/gabinete4.webp";
+import gabinete5 from "../../../../public/image/gabinetes/gabinete5.webp";
 
 export default function TowersPage() {
   const imagesData: { [key: number]: any } = {
@@ -17,7 +15,7 @@ export default function TowersPage() {
     4: gabinete5,
   };
 
-  const towersMapper = towers.map((tower, index) => ({
+  const towersMapper = dataJson.towers.map((tower, index) => ({
     ...tower,
     image: imagesData[index],
   }));
