@@ -14,8 +14,8 @@ export const ProductItem = ({
   image,
 }: Props) => {
   return (
-    <div className=" bg-white shadow-md rounded-lg max-w-xs items-center ">
-      <div className="w-full flex justify-center items-center min-h-52">
+    <div className="flex flex-col justify-evenly bg-white shadow-md rounded-lg max-w-xs items-center h-[500px]">
+      <div className="w-full flex justify-center items-center ">
         <Image
           src={image}
           alt={name}
