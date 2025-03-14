@@ -116,5 +116,47 @@
       "price": 84990,
       "stock": 20
     }
+  ],
+  "videoCards": [
+    {
+      "id": 1,
+      "name": "NVIDIA GeForce RTX 4080 SUPER",
+      "description": "Tarjeta gráfica con 16GB GDDR6X, 10240 núcleos CUDA y 2.5GHz boost clock",
+      "category": "Tarjetas de Video",
+      "price": 899990,
+      "stock": 12
+    },
+    {
+      "id": 2,
+      "name": "AMD Radeon RX 7900 XTX",
+      "description": "Tarjeta gráfica con 24GB GDDR6, tecnología RDNA 3 y 2.5GHz game clock",
+      "category": "Tarjetas de Video",
+      "price": 799990,
+      "stock": 15
+    },
+    {
+      "id": 3,
+      "name": "NVIDIA GeForce RTX 4070 Ti",
+      "description": "Tarjeta gráfica con 12GB GDDR6X, 7680 núcleos CUDA y 2.6GHz boost clock",
+      "category": "Tarjetas de Video",
+      "price": 649990,
+      "stock": 20
+    },
+    {
+      "id": 4,
+      "name": "AMD Radeon RX 7800 XT",
+      "description": "Tarjeta gráfica con 16GB GDDR6, arquitectura RDNA 3 y 2.4GHz game clock",
+      "category": "Tarjetas de Video",
+      "price": 549990,
+      "stock": 18
+    },
+    {
+      "id": 5,
+      "name": "NVIDIA GeForce RTX 4060 Ti",
+      "description": "Tarjeta gráfica con 8GB GDDR6, 4352 núcleos CUDA y 2.5GHz boost clock",
+      "category": "Tarjetas de Video",
+      "price": 399990,
+      "stock": 25
+    }
   ]
 }
