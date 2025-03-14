@@ -48,14 +48,16 @@ export default function ProductPage() {
           </Link>
         </div>
         <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md  items-center cursor-pointer">
-          <div className="w-full flex justify-center items-center">
-            <Image src={procesador} alt="procesador" className="w-full" />
-          </div>
-          <div className=" text-center">
-            <button className="w-full rounded-b-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Ir a procesadores
-            </button>
-          </div>
+          <Link href="/products/processors">
+            <div className="w-full flex justify-center items-center">
+              <Image src={procesador} alt="procesador" className="w-full" />
+            </div>
+            <div className=" text-center">
+              <button className="w-full rounded-b-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Ir a procesadores
+              </button>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

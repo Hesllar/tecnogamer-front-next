@@ -14,7 +14,7 @@ export default function Home() {
     3: intelCoreUltra265K,
   };
 
-  const highProductsMapper = dataJson.highProducts.map((product, index) => ({
+  const highProductsMapper = dataJson.processors.map((product, index) => ({
     ...product,
     image: imagesData[index],
   }));
