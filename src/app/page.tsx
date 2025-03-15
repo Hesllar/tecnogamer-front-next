@@ -1,6 +1,9 @@
+import { StaticImageData } from "next/image";
+
 import dataJson from "../data/products.json";
 
 import { Products } from "@/components/Products/Products";
+
 import amdRyzen5800 from "../../public/image/procesadores/AMD_RYZEN_7_5800X.webp";
 import amdRyzen9900 from "../../public/image/procesadores/AMD_REYZEN_9_9900X.webp";
 import intelCore11400 from "../../public/image/procesadores/INTEL_CORE_5_11400.webp";
@@ -26,7 +29,7 @@ export default function Home() {
 
   const arrayFivePosition = new Array(5).fill(null);
 
-  const imagesData: { [key: number]: any } = {
+  const imagesData: { [key: number]: StaticImageData } = {
     0: amdRyzen5800,
     1: amdRyzen9900,
     2: intelCore11400,
@@ -60,20 +63,30 @@ export default function Home() {
       };
     });
 
-  const randomItems = arrayFivePosition.map((_) => {
-    const valueRandom = Math.round(
-      Math.random() * (joinDataJson.length - 1) + 1
-    );
+  let uniqueValues: number[] = [];
 
-    return joinDataJson.find((item) => item.id === valueRandom)!;
-  });
+  const randomItems = () => {
+    do {
+      uniqueValues = arrayFivePosition.map(() => {
+        return Math.floor(Math.random() * joinDataJson.length) + 1;
+      });
+    } while (new Set(uniqueValues).size < 5);
+
+    return uniqueValues;
+  };
+
+  randomItems();
+
+  const getDataRandom = uniqueValues.map(
+    (value) => joinDataJson.find((item) => item.id === value)!
+  );
 
   return (
     <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">
       <h2 className="font-semibold text-3xl md:text-4xl">
         Productos destacados
       </h2>
-      <Products products={randomItems} />
+      <Products products={getDataRandom} />
     </div>
   );
 }

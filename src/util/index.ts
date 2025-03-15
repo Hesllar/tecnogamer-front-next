@@ -1,0 +1,1 @@
+export { formatCLP } from "./formatCLP";
