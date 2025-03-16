@@ -9,9 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        //Tono para temas oscuros
+
+        // Gradiente 1: Atardecer oscuro
+        "gradient-sunset":
+          "linear-gradient(135deg, #232526 0%, #414345 50%, #633231 100%)",
+        "gradient-sunset-invert":
+          "linear-gradient(135deg, #232526 0%, #414345 50%, #633231 20%)",
       },
     },
   },

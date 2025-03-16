@@ -18,12 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${inter.className} h-screen overflow-hidden`}>
+      <body
+        className={`${inter.className} h-screen overflow-hidden dark:bg-gradient-to-br from-black via-black to-purple-950`}
+      >
         <div className="flex">
           <Sidebar />
           <div className="flex-1 overflow-y-auto h-screen">
             <Nav />
-            <div className="px-0 py-10 md:p-5 ">{children}</div>
+            <div className="h-full px-0 py-10 md:p-5 ">{children}</div>
           </div>
         </div>
       </body>

@@ -9,7 +9,9 @@ import procesador from "../../../public/image/productos/procesadores.webp";
 export default function ProductPage() {
   return (
     <div className="flex flex-col gap-8 items-center pt-12 md:pt-8">
-      <h1 className="text-4xl font-bold text-center">Productos</h1>
+      <h1 className="text-4xl font-bold text-center dark:text-white">
+        Productos
+      </h1>
       <div className="grid grid-cols-1 2xl:grid-cols-2 min-[1921px]:grid-cols-4 gap-28 items-center">
         <div className="shadow-2xl rounded-lg max-w-sm md:max-w-md items-center cursor-pointer">
           <Link href="/products/towers">

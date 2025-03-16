@@ -13,7 +13,7 @@ export const Nav = () => {
   };
   return (
     <>
-      <nav className=" h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50 fixed bg-gradient-to-r from-cyan-500 via-green-400 to-white content-center md:px-10 md:static">
+      <nav className=" h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50 fixed bg-gradient-to-r from-cyan-500 via-green-400 to-white content-center md:px-10 md:static dark:bg-gradient-sunset">
         <div className="flex flex-wrap justify-between items-center w-full">
           <Link href="/" className="flex items-center">
             <h1 className="block self-center text-2xl font-serif font-bold whitespace-nowrap text-white">
@@ -23,7 +23,7 @@ export const Nav = () => {
           <IoMenu
             onClick={handleOnClick}
             size={30}
-            className="block cursor-pointer text-black md:hidden"
+            className="block cursor-pointer text-black md:hidden dark:text-white"
           />
         </div>
       </nav>

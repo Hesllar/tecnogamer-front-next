@@ -19,7 +19,7 @@ export const Sidebar = () => {
   return (
     <div
       id="sidebar"
-      className="hidden bg-white h-screen shadow-xl px-3 w-32 overflow-x-hidden transition-transform duration-300 ease-in-out md:block md:w-60 lg:w-80 "
+      className="hidden bg-white h-screen shadow-xl px-3 w-32 overflow-x-hidden transition-transform duration-300 ease-in-out md:block md:w-60 lg:w-80 dark:bg-gradient-to-b from-black to-orange-300"
       x-show="sidenav"
     >
       <div className="space-y-6 md:space-y-10 mt-10">
@@ -36,7 +36,7 @@ export const Sidebar = () => {
             <p className="text-md text-gray-500 text-center">Administrator</p>
           </div>
         </div>
-        <div id="menu" className="flex flex-col space-y-2">
+        <div id="menu" className="flex flex-col gap-4 space-y-2">
           {sidebar.map((item) => (
             <SidebarMenuItem key={item.path} {...item} />
           ))}
