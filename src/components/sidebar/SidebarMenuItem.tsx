@@ -1,4 +1,9 @@
+"use client";
+
+import clsx from "clsx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 
 interface Props {
   name: string;
@@ -7,14 +12,34 @@ interface Props {
 }
 
 export const SidebarMenuItem = ({ name, icon, path }: Props) => {
+  const pathname = usePathname();
+  const isActive = pathname === path;
+
   return (
     <Link
       href={path}
-      className="text-lg font-medium text-white px-2 rounded-md transition duration-150 ease-in-out hover:scale-105 "
+      className={clsx(
+        "bg-gray-400 text-lg font-medium text-white p-2 rounded-md transition duration-150 ease-in-out hover:scale-105",
+        {
+          "bg-gray-800": isActive,
+        }
+      )}
     >
       <div className="flex gap-3 items-center">
-        <div className="hidden md:block">{icon}</div>
-        <span className="">{name}</span>
+        <div
+          className={clsx("hidden md:block text-black dark:text-white", {
+            "text-white": isActive,
+          })}
+        >
+          {icon}
+        </div>
+        <span
+          className={clsx("text-black dark:text-white", {
+            "text-white": isActive,
+          })}
+        >
+          {name}
+        </span>
       </div>
     </Link>
   );
