@@ -5,15 +5,27 @@ import { useState } from "react";
 import { IoMenu } from "react-icons/io5";
 import { NavItems } from "./NavItems";
 
+const items = [
+  {
+    name: "Inicio",
+    path: "/",
+  },
+  {
+    name: "Productos",
+    path: "/products",
+  },
+];
+
 export const Nav = () => {
   //! TODO: remplazar manejador de estado por Zustand
   const [openNavItems, setOpenNavItems] = useState(false);
+
   const handleOnClick = () => {
     setOpenNavItems(!openNavItems);
   };
   return (
     <>
-      <nav className=" h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50 fixed bg-gradient-to-r from-cyan-500 via-green-400 to-white content-center md:px-10 md:static dark:bg-gradient-sunset">
+      <nav className=" h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50 fixed bg-gradient-cyan-via-green content-center md:px-10 md:static dark:bg-gradient-sunset">
         <div className="flex flex-wrap justify-between items-center w-full">
           <Link href="/" className="flex items-center">
             <h1 className="block self-center text-2xl font-serif font-bold whitespace-nowrap text-white">
@@ -27,7 +39,20 @@ export const Nav = () => {
           />
         </div>
       </nav>
-      {openNavItems && <NavItems setOpenNavItems={setOpenNavItems} />}
+      {openNavItems && (
+        <div className="flex flex-col fixed w-full top-14 text-center transform transition-all duration-300 translate-y-[0%] md:hidden">
+          {items.map((item) => (
+            <NavItems
+              index={items.indexOf(item)}
+              key={item.name}
+              path={item.path}
+              name={item.name}
+              itemsLength={items.length}
+              setOpenNavItems={setOpenNavItems}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };

@@ -1,42 +1,51 @@
 "use client";
 
+import clsx from "clsx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { IoIosKeypad, IoMdCube } from "react-icons/io";
+import { IoArrowForward } from "react-icons/io5";
 
 interface Props {
+  path: string;
+  name: string;
+  itemsLength: number;
+  index: number;
   setOpenNavItems: Dispatch<SetStateAction<boolean>>;
 }
 
-const items = [
-  {
-    name: "Inicio",
-    icon: <IoIosKeypad size={10} />,
-    path: "/",
-  },
-  {
-    name: "Productos",
-    icon: <IoMdCube size={10} />,
-    path: "/products",
-  },
-];
-export const NavItems = ({ setOpenNavItems }: Props) => {
+export const NavItems = ({
+  path,
+  name,
+  itemsLength,
+  index,
+  setOpenNavItems,
+}: Props) => {
+  const pathname = usePathname();
+  const isActive = pathname === path;
   return (
-    <div className="flex flex-col fixed w-full top-14 bg-slate-600 text-center transform transition-all duration-300 translate-y-[0%] md:hidden dark:bg-gradient-sunset-invert">
-      {items.map((item, index) => (
-        <Link
-          onClick={() => setOpenNavItems(false)}
-          href={item.path}
-          key={item.name}
-          className={`h-10 content-center ${
-            items.length - (index + 1) !== 0
-              ? "border-b-2 border-black"
-              : undefined
-          }`}
-        >
-          <span className="text-white text-lg font-semibold">{item.name}</span>
-        </Link>
-      ))}
-    </div>
+    <Link
+      onClick={() => setOpenNavItems(false)}
+      href={path}
+      key={name}
+      className={clsx(
+        `h-10 content-center cursor-pointer ${
+          itemsLength - (index + 1) !== 0
+            ? "border-b-2 border-black"
+            : undefined
+        }`,
+        {
+          "bg-gradient-cyan-via-green_custom_2 dark:bg-gradient-sunset-custom_2":
+            isActive,
+          "bg-gradient-cyan-via-green_custom_1 dark:bg-gradient-sunset-custom_1":
+            !isActive,
+        }
+      )}
+    >
+      <div className="flex items-center justify-center gap-6">
+        {isActive && <IoArrowForward fontSize={25} className=" text-white" />}
+        <span className="text-white text-lg font-semibold">{name}</span>
+      </div>
+    </Link>
   );
 };
