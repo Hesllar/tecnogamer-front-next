@@ -1,0 +1,14 @@
+
+services:
+  tecnogamer:
+    image: postgres:15.3
+    container_name: tecnogamer
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=tecnogamer
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
