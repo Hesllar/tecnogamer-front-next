@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model brand {
+  id          Int       @id @default(autoincrement())
+  name        String?   @unique @db.VarChar(200)
+  description String?
+  created_at  DateTime? @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at  DateTime? @db.Timestamp(6)
+  product     product[]
+}
+
+model category {
+  id          Int       @id @default(autoincrement())
+  name        String?   @unique @db.VarChar(200)
+  description String?
+  created_at  DateTime? @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at  DateTime? @db.Timestamp(6)
+  product     product[]
+}
+
+model order {
+  id         Int           @id @default(autoincrement())
+  status     order_status?
+  user_id    Int?
+  total      Decimal?      @db.Decimal(10, 2)
+  created_at DateTime?     @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+  user       user?         @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  order_item order_item[]
+}
+
+model order_item {
+  id         Int      @id @default(autoincrement())
+  order_id   Int?
+  product_id Int?
+  quantity   Int?
+  order      order?   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product    product? @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model product {
+  id          Int             @id @default(autoincrement())
+  name        String?         @unique @db.VarChar(200)
+  price       Decimal?        @db.Decimal(10, 2)
+  status      product_status?
+  stock       Int?
+  img_url     String?         @db.VarChar(200)
+  category_id Int?
+  brand_id    Int?
+  created_at  DateTime?       @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at  DateTime?       @db.Timestamp(6)
+  order_item  order_item[]
+  brand       brand?          @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  category    category?       @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model role_user {
+  id          Int     @id @default(autoincrement())
+  name        String? @db.VarChar
+  description String?
+  user        user[]
+}
+
+model tecnogamer_log {
+  id          Int       @id @default(autoincrement())
+  code        Int?
+  message     String?   @db.VarChar
+  method      String?   @db.VarChar
+  path        String?   @db.VarChar
+  status_code Int?
+  is_error    Boolean?
+  request     String?
+  stack       String?
+  username    String?   @db.VarChar
+  headers     String?
+  level       String?   @db.VarChar
+  created_at  DateTime? @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+}
+
+model user {
+  id           Int        @id @default(autoincrement())
+  email        String?    @unique @db.VarChar
+  name         String?    @db.VarChar
+  password     String?    @db.VarChar
+  description  String?
+  phone        String?    @db.VarChar
+  address      String?    @db.VarChar
+  role_user_id Int?
+  created_at   DateTime?  @default(dbgenerated("'2025-04-07 20:22:45.225393'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at   DateTime?  @db.Timestamp(6)
+  order        order[]
+  role_user    role_user? @relation(fields: [role_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum order_status {
+  placed
+  confirm
+  processed
+  complete
+}
+
+enum product_status {
+  in_stock
+  out_of_stock
+  running_low
+}
