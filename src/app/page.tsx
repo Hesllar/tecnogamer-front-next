@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 
 import dataJson from "../data/products.json";
 
-import { Products } from "@/components/Products/Products";
+import { ProductsGrid } from "@/products/components/ProductsGrid";
 
 import amdRyzen5800 from "../../public/image/procesadores/AMD_RYZEN_7_5800X.webp";
 import amdRyzen9900 from "../../public/image/procesadores/AMD_REYZEN_9_9900X.webp";
@@ -86,7 +86,7 @@ export default function Home() {
       <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
         Productos destacados
       </h2>
-      <Products products={getDataRandom} />
+      <ProductsGrid products={getDataRandom} />
     </div>
   );
 }

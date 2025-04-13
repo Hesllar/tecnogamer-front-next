@@ -6,7 +6,7 @@ interface Props {
   products: Iproducts[];
 }
 
-export const Products = ({ products = [] }: Props) => {
+export const ProductsGrid = ({ products = [] }: Props) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
       {products.map((product) => (

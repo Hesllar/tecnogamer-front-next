@@ -1,5 +1,5 @@
 import dataJson from "../../../data/products.json";
-import { Products } from "@/components/Products/Products";
+import { ProductsGrid } from "@/products/components/ProductsGrid";
 import gpu1 from "../../../../public/image/tarjetasVideo/gpu1.webp";
 import gpu2 from "../../../../public/image/tarjetasVideo/gpu2.webp";
 import gpu3 from "../../../../public/image/tarjetasVideo/gpu3.webp";
@@ -23,7 +23,7 @@ export default function VideoCardsPage() {
       <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
         Tarjetas de video
       </h2>
-      <Products products={videoCardsMapper} />
+      <ProductsGrid products={videoCardsMapper} />
     </div>
   );
 }

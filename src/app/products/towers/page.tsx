@@ -1,5 +1,5 @@
 import dataJson from "../../../data/products.json";
-import { Products } from "@/components/Products/Products";
+import { ProductsGrid } from "@/products/components/ProductsGrid";
 import gabinete1 from "../../../../public/image/gabinetes/gabinete1.webp";
 import gabinete2 from "../../../../public/image/gabinetes/gabinete2.webp";
 import gabinete3 from "../../../../public/image/gabinetes/gabinete3.webp";
@@ -24,7 +24,7 @@ export default function TowersPage() {
       <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
         Gabinetes
       </h2>
-      <Products products={towersMapper} />
+      <ProductsGrid products={towersMapper} />
     </div>
   );
 }

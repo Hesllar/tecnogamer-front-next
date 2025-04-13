@@ -26,9 +26,10 @@ export const ProductItem = ({
       </div>
       <div className="flex flex-col gap-3 px-5 pb-5">
         <h3 className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white">
-          {description.length > 50
+          {name}
+          {/* {description.length > 50
             ? description.slice(0, 50) + "..."
-            : description}
+            : description} */}
         </h3>
         <div className="flex flex-col gap-2 items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">

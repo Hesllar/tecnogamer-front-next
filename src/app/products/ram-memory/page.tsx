@@ -1,5 +1,5 @@
 import dataJson from "../../../data/products.json";
-import { Products } from "@/components/Products/Products";
+import { ProductsGrid } from "@/products/components/ProductsGrid";
 import memoriaRam1 from "../../../../public/image/memoriasRam/ram1.webp";
 import memoriaRam2 from "../../../../public/image/memoriasRam/ram2.webp";
 import memoriaRam3 from "../../../../public/image/memoriasRam/ram3.webp";
@@ -24,7 +24,7 @@ export default function RamMemoryPage() {
       <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
         Memorias Ram
       </h2>
-      <Products products={ramMemoryMapper} />
+      <ProductsGrid products={ramMemoryMapper} />
     </div>
   );
 }
