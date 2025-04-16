@@ -1,36 +1,31 @@
-import Image, { StaticImageData } from "next/image";
-import { Products } from "@/interfaces/products";
+import { Product } from "@/interfaces/products";
 import { formatCLP } from "@/util";
-
-interface Props extends Products {
-  image: StaticImageData;
-}
+import Image from "next/image";
 
 export const ProductItem = ({
   id,
   name,
   description,
-  category,
+  categoryId,
+  brandId,
   price,
-  image,
-}: Props) => {
+  imageUrl,
+}: Product) => {
   return (
-    <div className="flex flex-col justify-between bg-white shadow-md rounded-lg max-w-xs items-center h-[500px]: dark:bg-zinc-800">
+    <div className="flex flex-col justify-between bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
       <div className="w-full flex justify-center items-center h-[250px]">
         <Image
-          src={image}
+          src={imageUrl ?? ""}
           alt={name}
-          height={250}
-          className="rounded-t-lg p-4"
+          height={150}
+          width={250}
+          className="w-[250px] h-full p-5"
         />
       </div>
       <div className="flex flex-col gap-3 px-5 pb-5">
-        <h3 className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white">
+        <h2 className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white">
           {name}
-          {/* {description.length > 50
-            ? description.slice(0, 50) + "..."
-            : description} */}
-        </h3>
+        </h2>
         <div className="flex flex-col gap-2 items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             {formatCLP(price)}
