@@ -7,15 +7,11 @@ export default async function ProcessorsPage() {
   const processors = await productsApi.getProducts(1);
 
   return (
-    <>
-      <Filter />
-
-      <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">
-        <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
-          Procesadores
-        </h2>
-        <ProductsGrid products={processors} />
-      </div>
-    </>
+    <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">
+      <h2 className="font-semibold text-3xl md:text-4xl dark:text-white">
+        Procesadores
+      </h2>
+      <ProductsGrid products={processors} />
+    </div>
   );
 }
