@@ -16,7 +16,7 @@ export const getProducts = async (categoryId: number): Promise<Product[]> => {
     const productsMapper = products.map((product: product) => {
       return {
         ...product,
-        imageUrl: product.img_url,
+        imageUrl: product.img_url || null,
         categoryId: product.category_id,
         brandId: product.brand_id,
       };
