@@ -1,9 +1,10 @@
 import * as productsApi from "@/products/helpers";
 
 import { ProductsGrid } from "@/products/components/ProductsGrid";
+import { EnumCategory } from "@/interfaces/products";
 
 export default async function Home() {
-  const products = await productsApi.getProducts(0);
+  const products = await productsApi.getProducts(EnumCategory.All);
 
   // let uniqueValues: number[] = [];
 

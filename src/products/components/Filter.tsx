@@ -16,7 +16,7 @@ export const Filter = () => {
             className=" flex bg-amber-700 content-center items-center gap-2 p-2 rounded-lg cursor-pointer md:p-4"
             onClick={openMenu}
           >
-            <strong className="text-lg text-white">Filtrar</strong>
+            <strong className="text-lg text-white">Filtros</strong>
             <FaFilter className="text-white" />
           </div>
         </div>

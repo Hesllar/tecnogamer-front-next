@@ -1,5 +1,5 @@
 import type { product } from "@prisma/client";
-import { Product } from "@/interfaces/products";
+import { Price, Product } from "@/interfaces/products";
 import { env } from "process";
 
 export const getProducts = async (categoryId: number): Promise<Product[]> => {
@@ -28,5 +28,30 @@ export const getProducts = async (categoryId: number): Promise<Product[]> => {
       console.error(error.message);
     }
     return [];
+  }
+};
+
+export const getPrice = async (categoryId: number): Promise<Price> => {
+  try {
+    const response = await fetch(
+      `/api/products/price?category_id=${categoryId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error fetching price");
+    }
+
+    const price = await response.json();
+
+    return {
+      price: {
+        max: price._max.price || 0,
+      },
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    throw error;
   }
 };

@@ -1,19 +1,36 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { FaArrowRight } from "react-icons/fa";
 import clsx from "clsx";
 import { useUIStore } from "@/store/ui/ui-store";
-import { FaArrowRight } from "react-icons/fa";
-import { useState } from "react";
+import { SelectBrand } from "@/brands/components/SelectBrand";
+import { Brand } from "@/brands/interfaces";
+import * as productApi from "@/products/helpers";
+import { identifyCategoryByURL } from "@/helper";
 
 interface SidebarProps {
   isSideMenuOpen: boolean;
   closeMenu: () => void;
+  brands: Brand[];
+  pathname: string;
 }
 
-const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
+interface SidebarFilterProps {
+  brands: Brand[];
+}
+
+const Sidebar = ({
+  isSideMenuOpen,
+  closeMenu,
+  brands,
+  pathname,
+}: SidebarProps) => {
+  const [maxValue, setMaxValue] = useState<number | undefined>(undefined);
+
   const [filterData, setFilterData] = useState({
-    categoryId: 0,
+    brandId: 0,
     price: 0,
   });
 
@@ -23,14 +40,48 @@ const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
     setFilterData((prev) => {
       return {
         ...prev,
-        [target.name]: target.value,
+        [target.name]: +target.value,
       };
     });
   };
 
   const handleSubmit = () => {
     closeMenu();
+    handleReset();
   };
+
+  const handleReset = () => {
+    if (filterData.brandId === 0 && filterData.price === 0) return;
+    setFilterData({
+      brandId: 0,
+      price: 0,
+    });
+  };
+
+  const disabledButton = () => {
+    if (filterData.brandId === 0 || maxValue === undefined) {
+      return true;
+    }
+    return false;
+  };
+
+  {
+    /* Obtengo el precio maximo de los productos */
+  }
+  useEffect(() => {
+    const categoryId = identifyCategoryByURL(pathname);
+
+    if (!categoryId) return;
+
+    productApi
+      .getPrice(categoryId)
+      .then(({ price }) => {
+        setMaxValue(price.max);
+      })
+      .catch(() => {
+        setMaxValue(undefined);
+      });
+  }, [pathname]);
 
   return (
     <div
@@ -44,23 +95,19 @@ const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
       <FaArrowRight
         size={40}
         className="text-white cursor-pointer"
-        onClick={closeMenu}
+        onClick={() => {
+          closeMenu();
+          handleReset();
+        }}
       />
       <div className="flex flex-col gap-8 justify-center mt-32">
         <div>
-          <select
-            name="categoryId"
-            onChange={handleOnchange}
-            value={filterData.categoryId}
-            className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer pr-10"
-          >
-            <option value={0} disabled>
-              Selecciona una categoría
-            </option>
-            <option value="">Price</option>
-            <option value="category">Category</option>
-            <option value="brand">Brand</option>
-          </select>
+          {/* Componente de selector */}
+          <SelectBrand
+            brandId={filterData.brandId}
+            brands={brands}
+            handleOnchange={handleOnchange}
+          />
         </div>
         <div>
           <span className="font-semibold text-white">
@@ -69,11 +116,12 @@ const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
           <input
             type="range"
             min={0}
-            max={1000}
+            max={maxValue}
             className="w-full"
             value={filterData.price}
             name="price"
             onChange={handleOnchange}
+            disabled={maxValue === undefined}
           />
           <div className="flex justify-center">
             <span className="text-white font-semibold">{`$ ${filterData.price}`}</span>
@@ -84,7 +132,14 @@ const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
       <div className="flex justify-center mt-16">
         <button
           onClick={handleSubmit}
-          className="bg-white w-full p-4 rounded-lg  font-semibold hover:shadow-l hover:bg-zinc-100"
+          className={clsx(
+            "bg-white w-full p-4 rounded-lg  font-semibold hover:shadow-l hover:bg-zinc-100",
+            {
+              "bg-gray-300 text-gray-500 cursor-not-allowed rounded font-medium shadow-sm opacity-75":
+                disabledButton(),
+            }
+          )}
+          disabled={disabledButton()}
         >
           Filtrar
         </button>
@@ -93,7 +148,7 @@ const Sidebar = ({ isSideMenuOpen, closeMenu }: SidebarProps) => {
   );
 };
 
-export const SidebarFilter = () => {
+export const SidebarFilter = ({ brands }: SidebarFilterProps) => {
   const pathname = usePathname();
   const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen);
   const closeMenu = useUIStore((state) => state.closeSideMenu);
@@ -101,7 +156,12 @@ export const SidebarFilter = () => {
   return (
     <>
       {pathname !== "/products" ? (
-        <Sidebar isSideMenuOpen={isSideMenuOpen} closeMenu={closeMenu} />
+        <Sidebar
+          isSideMenuOpen={isSideMenuOpen}
+          closeMenu={closeMenu}
+          brands={brands}
+          pathname={pathname}
+        />
       ) : null}
 
       {/* Blur */}

@@ -2,9 +2,10 @@ import * as productsApi from "@/products/helpers";
 
 import { ProductsGrid } from "@/products/components/ProductsGrid";
 import { Filter } from "@/products/components/Filter";
+import { EnumCategory } from "@/interfaces/products";
 
 export default async function ProcessorsPage() {
-  const processors = await productsApi.getProducts(1);
+  const processors = await productsApi.getProducts(EnumCategory.Procesadores);
 
   return (
     <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">

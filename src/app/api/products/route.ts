@@ -6,6 +6,8 @@ export async function GET(request: Request) {
 
   const category_id = Number(searchParams.get("category_id") ?? 0);
 
+  const minPrice = Number(searchParams.get("minPrice") ?? 0);
+
   if (isNaN(category_id)) {
     return NextResponse.json(
       { message: "category_id tiene que ser un número" },
@@ -18,7 +20,14 @@ export async function GET(request: Request) {
   if (category_id === 0) {
     products = await prisma.product.findMany();
   } else {
-    products = await prisma.product.findMany({ where: { category_id } });
+    products = await prisma.product.findMany({
+      where: {
+        category_id,
+        price: {
+          gt: minPrice,
+        },
+      },
+    });
   }
 
   if (products.length === 0) {

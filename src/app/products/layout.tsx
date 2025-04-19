@@ -1,11 +1,14 @@
 import { Filter } from "@/products/components/Filter";
 import { SidebarFilter } from "@/products/components/SidebarFilter";
+import * as brandApi from "@/brands/helper";
 
-export default function ({ children }: { children: React.ReactNode }) {
+export default async function ({ children }: { children: React.ReactNode }) {
+  const brands = await brandApi.getBrands();
+
   return (
     <>
       <Filter />
-      <SidebarFilter />
+      <SidebarFilter brands={brands} />
       {children}
     </>
   );
