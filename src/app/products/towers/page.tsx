@@ -4,7 +4,9 @@ import { ProductsGrid } from "@/products/components/ProductsGrid";
 import { EnumCategory } from "@/interfaces/products";
 
 export default async function TowersPage() {
-  const towers = await productsApi.getProducts(EnumCategory.Gabinetes);
+  const towers = await productsApi.getProducts({
+    categoryId: EnumCategory.Gabinetes,
+  });
 
   return (
     <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">

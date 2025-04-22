@@ -4,7 +4,9 @@ import { ProductsGrid } from "@/products/components/ProductsGrid";
 import { EnumCategory } from "@/interfaces/products";
 
 export default async function RamMemoryPage() {
-  const ramMemories = await productsApi.getProducts(EnumCategory.MemoriaRAM);
+  const ramMemories = await productsApi.getProducts({
+    categoryId: EnumCategory.MemoriaRAM,
+  });
 
   return (
     <div className="flex flex-col items-center gap-8 pt-12 md:pt-8">
