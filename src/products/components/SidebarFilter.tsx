@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import clsx from "clsx";
 import { useUIStore } from "@/store/ui/ui-store";
+import { useProductStore } from "@/store/products/product-store";
 import { SelectBrand } from "@/brands/components/SelectBrand";
 import { Brand } from "@/brands/interfaces";
 import * as productApi from "@/products/helpers";
@@ -27,11 +28,22 @@ const Sidebar = ({
   brands,
   pathname,
 }: SidebarProps) => {
+  {
+    /*Gestor de estados de productos */
+  }
+  const {
+    filterProduct,
+    setApplyFilter,
+    setFilterProduct,
+    resetFilterProduct,
+  } = useProductStore((state) => state);
+
   const [maxValue, setMaxValue] = useState<number | undefined>(undefined);
 
   const [filterData, setFilterData] = useState({
-    brandId: 0,
-    price: 0,
+    categoryId: filterProduct.categoryId,
+    brandId: filterProduct.brandId,
+    rangePrice: filterProduct.rangePrice,
   });
 
   const handleOnchange = ({
@@ -46,15 +58,21 @@ const Sidebar = ({
   };
 
   const handleSubmit = () => {
+    setApplyFilter(true);
+    setFilterProduct(filterData);
     closeMenu();
     handleReset();
   };
 
   const handleReset = () => {
-    if (filterData.brandId === 0 && filterData.price === 0) return;
-    setFilterData({
-      brandId: 0,
-      price: 0,
+    if (filterData.brandId === "" && filterData.rangePrice === 0) return;
+
+    setFilterData((prev) => {
+      return {
+        ...prev,
+        brandId: "",
+        rangePrice: 0,
+      };
     });
   };
 
@@ -77,6 +95,12 @@ const Sidebar = ({
       .getPrice(categoryId)
       .then(({ price }) => {
         setMaxValue(price.max);
+        setFilterData((prev) => {
+          return {
+            ...prev,
+            categoryId: categoryId,
+          };
+        });
       })
       .catch(() => {
         setMaxValue(undefined);
@@ -118,13 +142,13 @@ const Sidebar = ({
             min={0}
             max={maxValue}
             className="w-full"
-            value={filterData.price}
-            name="price"
+            value={filterData.rangePrice}
+            name="rangePrice"
             onChange={handleOnchange}
             disabled={maxValue === undefined}
           />
           <div className="flex justify-center">
-            <span className="text-white font-semibold">{`$ ${filterData.price}`}</span>
+            <span className="text-white font-semibold">{`$ ${filterData.rangePrice}`}</span>
           </div>
         </div>
       </div>
