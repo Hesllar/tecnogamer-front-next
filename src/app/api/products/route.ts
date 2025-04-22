@@ -4,29 +4,36 @@ import { NextResponse, NextRequest } from "next/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const category_id = Number(searchParams.get("category_id") ?? 0);
+  const categoryId = Number(searchParams.get("categoryId") ?? 0);
 
-  const minPrice = Number(searchParams.get("minPrice") ?? 0);
+  const rangePrice = Number(searchParams.get("rangePrice") ?? 0);
 
-  if (isNaN(category_id)) {
+  const brandId = Number(searchParams.get("brandId") ?? null);
+
+  if (isNaN(categoryId)) {
     return NextResponse.json(
-      { message: "category_id tiene que ser un número" },
+      { message: "categoryId tiene que ser un número" },
       { status: 400 }
     );
   }
 
   let products = [];
 
-  if (category_id === 0) {
+  if (categoryId === 0) {
     products = await prisma.product.findMany();
-  } else {
+  } else if (brandId) {
     products = await prisma.product.findMany({
       where: {
-        category_id,
+        category_id: categoryId,
+        brand_id: brandId,
         price: {
-          gt: minPrice,
+          gte: rangePrice,
         },
       },
+    });
+  } else {
+    products = await prisma.product.findMany({
+      where: { category_id: categoryId, price: { gte: rangePrice } },
     });
   }
 
