@@ -1,29 +1,17 @@
+import { ProductStore } from "@/interfaces/products";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-interface State {
-  filterProduct: {
-    categoryId: number;
-    brandId: number | string;
-    rangePrice: number;
-  };
-  applyFilter: boolean;
-  isLoading: boolean;
-  setFilterProduct: (filterProduct: State["filterProduct"]) => void;
-  resetFilterProduct: (categoryId?: number) => void;
-  setApplyFilter: (applyFilter: boolean) => void;
-  setIsLoading: (isLoading: boolean) => void;
-}
-
-export const useProductStore = create<State>()(
+export const useProductStore = create<ProductStore>()(
   devtools(
     (set, get) => ({
       filterProduct: {
         categoryId: 0,
         brandId: "",
         rangePrice: 0,
-        isLoading: false,
+        maxPrice: 0,
       },
+      isLoading: false,
       applyFilter: false,
       setFilterProduct: (filterProduct) => set({ filterProduct }),
       resetFilterProduct: () => {

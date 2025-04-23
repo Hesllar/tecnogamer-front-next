@@ -3,15 +3,7 @@ import { Product } from "@/interfaces/products";
 import { formatCLP } from "@/util";
 import ImageNotFound from "../../../public/imagen_no_encontrada.webp";
 
-export const ProductItem = ({
-  id,
-  name,
-  description,
-  categoryId,
-  brandId,
-  price,
-  imageUrl,
-}: Product) => {
+export const ProductItem = ({ id, name, price, imageUrl }: Product) => {
   return (
     <div className="flex flex-col justify-between bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
       <div className="w-full flex justify-center items-center h-[250px]">

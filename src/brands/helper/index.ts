@@ -1,9 +1,9 @@
 import { env } from "process";
 import { Brand } from "../interfaces";
 
-export const getBrands = async (): Promise<Brand[]> => {
+export const getBrands = async (categoryId: number): Promise<Brand[]> => {
   try {
-    const response = await fetch(`${env.BASE_URL}/api/brand`);
+    const response = await fetch(`/api/brand?categoryId=${categoryId}`);
     if (!response.ok) {
       throw new Error("Error fetching brands");
     }

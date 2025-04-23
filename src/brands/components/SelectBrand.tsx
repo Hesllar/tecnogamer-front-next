@@ -1,18 +1,73 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
 import { Brand } from "../interfaces";
+import { identifyCategoryByURL } from "@/helper";
+import * as brandAPI from "@/brands/helper";
+import { useUIStore } from "@/store/ui/ui-store";
+import clsx from "clsx";
 
 interface Props {
   handleOnchange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  brandId: number | string;
-  brands: Brand[];
+  valueSelect: number | string;
 }
 
-export const SelectBrand = ({ handleOnchange, brandId, brands }: Props) => {
+export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
+  const { isSideMenuOpen } = useUIStore((state) => state);
+
+  const pathname = usePathname();
+
+  const [brands, setBrands] = useState<Brand[]>([
+    {
+      id: 0,
+      name: "Todos las marcas",
+    },
+  ]);
+
+  {
+    /* Con este efecto consultamos las marcas de los productos relacionadas a la categoriía */
+  }
+
+  useEffect(() => {
+    if (isSideMenuOpen && brands.length < 2) {
+      const categoryId = identifyCategoryByURL(pathname);
+
+      if (!categoryId) return;
+
+      brandAPI
+        .getBrands(categoryId)
+        .then((brands) => {
+          setBrands((prev) => {
+            brands.map((brand, index) => {
+              return {
+                id: index + 1,
+                name: brand.name,
+              };
+            });
+            return [...prev, ...brands];
+          });
+        })
+        .catch(() => {
+          setBrands([]);
+        });
+    }
+  }, [isSideMenuOpen]);
+
   return (
     <select
+      disabled={brands.length === 0}
       name="brandId"
       onChange={handleOnchange}
-      value={brandId}
-      className="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer pr-10"
+      value={valueSelect}
+      className={clsx(
+        "w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  pr-10",
+        {
+          "cursor-not-allowed": brands.length === 0,
+          "cursor-pointer": brands.length > 0,
+        }
+      )}
     >
       <option value={""} disabled>
         Selecciona una marca
