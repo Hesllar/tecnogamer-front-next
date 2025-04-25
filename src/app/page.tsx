@@ -4,27 +4,7 @@ import { ProductsGrid } from "@/products/components/ProductsGrid";
 import { EnumCategory } from "@/interfaces/products";
 
 export default async function Home() {
-  const products = await productsApi.getProducts({
-    categoryId: EnumCategory.All,
-  });
-
-  // let uniqueValues: number[] = [];
-
-  // const randomItems = () => {
-  //   do {
-  //     uniqueValues = arrayFivePosition.map(() => {
-  //       return Math.floor(Math.random() * joinDataJson.length) + 1;
-  //     });
-  //   } while (new Set(uniqueValues).size < 5);
-
-  //   return uniqueValues;
-  // };
-
-  // randomItems();
-
-  // const getDataRandom = uniqueValues.map(
-  //   (value) => joinDataJson.find((item) => item.id === value)!
-  // );
+  const products = await productsApi.getFeaturedProducts();
 
   return (
     <div className="flex flex-col items-center gap-8 p-12 md:p-8">

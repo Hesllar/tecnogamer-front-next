@@ -70,3 +70,24 @@ export const getPrice = async (categoryId: number): Promise<Price> => {
     throw error;
   }
 };
+
+export const getFeaturedProducts = async (): Promise<Product[]> => {
+  try {
+    const response = await fetch(
+      `${env.BASE_URL}/api/products/featured-products`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error fetching featured products");
+    }
+
+    const featuredProducts = await response.json();
+
+    return featuredProducts;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return [];
+  }
+};
