@@ -23,7 +23,9 @@ const Sidebar = () => {
   {
     /*Gestor de estados de UI */
   }
-  const { isSideMenuOpen, closeSideMenu } = useUIStore((state) => state);
+  const { isSidebarFilterOpen, closeSidebarFilter } = useUIStore(
+    (state) => state.sidebarFilter
+  );
 
   const handleOnchange = ({
     target,
@@ -36,7 +38,7 @@ const Sidebar = () => {
 
   const handleSubmit = () => {
     setApplyFilter(true);
-    closeSideMenu();
+    closeSidebarFilter();
   };
 
   const handleReset = () => {
@@ -55,10 +57,10 @@ const Sidebar = () => {
   return (
     <>
       {/* Blur */}
-      {isSideMenuOpen && (
+      {isSidebarFilterOpen && (
         <div
           onClick={() => {
-            closeSideMenu();
+            closeSidebarFilter();
             handleReset();
           }}
           className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
@@ -69,7 +71,7 @@ const Sidebar = () => {
         className={clsx(
           "fixed p-5 right-0 top-0 w-[350px] h-screen bg-amber-700 z-20 shadow-2xl transition-transform duration-300 ease-in-out",
           {
-            "translate-x-full": !isSideMenuOpen,
+            "translate-x-full": !isSidebarFilterOpen,
           }
         )}
       >
@@ -77,7 +79,7 @@ const Sidebar = () => {
           size={40}
           className="text-white cursor-pointer"
           onClick={() => {
-            closeSideMenu();
+            closeSidebarFilter();
             handleReset();
           }}
         />
