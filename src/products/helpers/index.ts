@@ -31,7 +31,7 @@ export const getProducts = async ({
     const productsMapper = products.map((product: product) => {
       return {
         ...product,
-        imageUrl: product.img_url || null,
+        imageUrl: product.images,
         categoryId: product.category_id,
         brandId: product.brand_id,
       };

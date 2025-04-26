@@ -14,11 +14,10 @@ export async function GET(request: Request) {
     distinct  
     p.id, p."name", 
     p.price, 
-    p.img_url 
+    p.images
   from product p
   inner join order_item oi on p.id = oi.product_id
-  inner join "order" o on o.id = oi.order_id
-  group by p.id, p."name", p.price, p.img_url
+  group by p.id, p."name", p.price, p.images
   having count(oi.product_id) > 1`;
 
   if (featuredProducts.length === 0) {
