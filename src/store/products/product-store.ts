@@ -9,7 +9,7 @@ export const useProductStore = create<ProductStore>()(
         categoryId: 0,
         brandId: "",
         rangePrice: 0,
-        maxPrice: 0,
+        maxPrice: undefined,
       },
       isLoading: false,
       applyFilter: false,

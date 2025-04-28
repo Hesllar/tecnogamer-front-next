@@ -1,6 +1,11 @@
+"use client";
+
+import { FaArrowLeft } from "react-icons/fa";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
 import { IoMdCube, IoIosKeypad } from "react-icons/io";
+import { useUIStore } from "@/store/ui/ui-store";
+import clsx from "clsx";
 
 const sidebar = [
   {
@@ -16,12 +21,29 @@ const sidebar = [
 ];
 
 export const Sidebar = () => {
+  const { isSideMenuOpen, toggleSideMenu } = useUIStore(
+    (state) => state.sideMenuDesktop
+  );
+
   return (
     <div
       id="sidebar"
-      className="hidden bg-white h-screen shadow-xl px-3 w-32 overflow-x-hidden transition-transform duration-300 ease-in-out md:block md:w-60 lg:w-80 dark:bg-gradient-to-b from-black to-orange-300"
+      className={clsx(
+        " bg-white h-screen w-0 block left-0 shadow-xl overflow-x-hidden transform transition-all duration-500 ease-in-out dark:bg-gradient-to-b from-black to-orange-300",
+        {
+          "-translate-x-52 md:w-0 px-0": !isSideMenuOpen,
+          "w-0 px-0 md:w-80 md:px-3": isSideMenuOpen,
+        }
+      )}
       x-show="sidenav"
     >
+      <div className="w-full flex justify-end items-center mt-4 ">
+        <FaArrowLeft
+          size={35}
+          className="text-white cursor-pointer"
+          onClick={toggleSideMenu}
+        />
+      </div>
       <div className="space-y-6 md:space-y-10 mt-10">
         <div id="profile" className="space-y-3">
           <img

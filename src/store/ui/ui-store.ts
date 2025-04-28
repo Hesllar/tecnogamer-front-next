@@ -6,10 +6,14 @@ interface State {
     openSidebarFilter: () => void;
     closeSidebarFilter: () => void;
   };
-  isSideMenuOpen: boolean;
-
-  openSideMenu: () => void;
-  closeSideMenu: () => void;
+  sideMenuDesktop: {
+    isSideMenuOpen: boolean;
+    toggleSideMenu: () => void;
+  };
+  sideMenuMobile: {
+    isSideMenuOpen: boolean;
+    toggleSideMenu: () => void;
+  };
 }
 
 export const useUIStore = create<State>()((set, get) => ({
@@ -26,8 +30,30 @@ export const useUIStore = create<State>()((set, get) => ({
       set({ sidebarFilter: { ...sidebarFilter, isSidebarFilterOpen: false } });
     },
   },
-  isSideMenuOpen: false,
+  sideMenuDesktop: {
+    isSideMenuOpen: true,
+    toggleSideMenu: () => {
+      const { sideMenuDesktop } = get();
 
-  openSideMenu: () => set({ isSideMenuOpen: true }),
-  closeSideMenu: () => set({ isSideMenuOpen: false }),
+      set({
+        sideMenuDesktop: {
+          ...sideMenuDesktop,
+          isSideMenuOpen: !sideMenuDesktop.isSideMenuOpen,
+        },
+      });
+    },
+  },
+  sideMenuMobile: {
+    isSideMenuOpen: false,
+    toggleSideMenu: () => {
+      const { sideMenuMobile } = get();
+
+      set({
+        sideMenuMobile: {
+          ...sideMenuMobile,
+          isSideMenuOpen: !sideMenuMobile.isSideMenuOpen,
+        },
+      });
+    },
+  },
 }));

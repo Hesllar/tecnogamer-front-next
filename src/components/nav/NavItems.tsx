@@ -1,9 +1,9 @@
 "use client";
 
+import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Dispatch, SetStateAction } from "react";
 import { IoArrowForward } from "react-icons/io5";
 
 interface Props {
@@ -11,21 +11,15 @@ interface Props {
   name: string;
   itemsLength: number;
   index: number;
-  setOpenNavItems: Dispatch<SetStateAction<boolean>>;
 }
 
-export const NavItems = ({
-  path,
-  name,
-  itemsLength,
-  index,
-  setOpenNavItems,
-}: Props) => {
+export const NavItems = ({ path, name, itemsLength, index }: Props) => {
+  const { toggleSideMenu } = useUIStore((state) => state.sideMenuMobile);
   const pathname = usePathname();
   const isActive = pathname === path;
   return (
     <Link
-      onClick={() => setOpenNavItems(false)}
+      onClick={toggleSideMenu}
       href={path}
       key={name}
       className={clsx(

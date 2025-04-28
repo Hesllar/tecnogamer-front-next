@@ -7,6 +7,7 @@ import { identifyCategoryByURL } from "@/helper";
 import * as productApi from "@/products/helpers";
 import { useProductStore } from "@/store/products/product-store";
 import { useUIStore } from "@/store/ui/ui-store";
+import clsx from "clsx";
 
 interface Props {
   rangePrice: number;
@@ -16,7 +17,7 @@ interface Props {
 export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
   const pathname = usePathname();
 
-  const { isSideMenuOpen } = useUIStore((state) => state);
+  const { isSidebarFilterOpen } = useUIStore((state) => state.sidebarFilter);
 
   const { filterProduct, setFilterProduct } = useProductStore((state) => state);
 
@@ -24,7 +25,7 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
     /* Obtengo el precio maximo de los productos */
   }
   useEffect(() => {
-    if (isSideMenuOpen && filterProduct.maxPrice === 0) {
+    if (isSidebarFilterOpen && filterProduct.maxPrice === undefined) {
       const categoryId = identifyCategoryByURL(pathname);
 
       if (!categoryId) return;
@@ -44,7 +45,7 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
           });
         });
     }
-  }, [isSideMenuOpen]);
+  }, [isSidebarFilterOpen]);
   return (
     <div>
       <span className="font-semibold text-white">
@@ -54,7 +55,10 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
         type="range"
         min={0}
         max={filterProduct.maxPrice}
-        className="w-full"
+        className={clsx("w-full", {
+          "cursor-not-allowed": filterProduct.maxPrice === undefined,
+          " cursor-pointer": filterProduct.maxPrice !== undefined,
+        })}
         value={rangePrice}
         name="rangePrice"
         onChange={handleOnchange}

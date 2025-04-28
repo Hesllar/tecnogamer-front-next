@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
-  const { isSideMenuOpen } = useUIStore((state) => state);
+  const { isSidebarFilterOpen } = useUIStore((state) => state.sidebarFilter);
 
   const pathname = usePathname();
 
@@ -31,7 +31,7 @@ export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
   }
 
   useEffect(() => {
-    if (isSideMenuOpen && brands.length < 2) {
+    if (isSidebarFilterOpen && brands.length < 2) {
       const categoryId = identifyCategoryByURL(pathname);
 
       if (!categoryId) return;
@@ -39,6 +39,11 @@ export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
       brandAPI
         .getBrands(categoryId)
         .then((brands) => {
+          if (brands.length === 0) {
+            setBrands([]);
+            return;
+          }
+
           setBrands((prev) => {
             brands.map((brand, index) => {
               return {
@@ -53,19 +58,19 @@ export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
           setBrands([]);
         });
     }
-  }, [isSideMenuOpen]);
+  }, [isSidebarFilterOpen]);
 
   return (
     <select
-      disabled={brands.length === 0}
+      disabled={brands.length <= 2}
       name="brandId"
       onChange={handleOnchange}
       value={valueSelect}
       className={clsx(
         "w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500  pr-10",
         {
-          "cursor-not-allowed": brands.length === 0,
-          "cursor-pointer": brands.length > 0,
+          "cursor-not-allowed": brands.length <= 2,
+          "cursor-pointer": brands.length > 2,
         }
       )}
     >
