@@ -23,7 +23,7 @@ const Sidebar = () => {
   {
     /*Gestor de estados de UI */
   }
-  const { isSidebarFilterOpen, closeSidebarFilter } = useUIStore(
+  const { isSidebarFilterOpen, toggleSideFilterMenu } = useUIStore(
     (state) => state.sidebarFilter
   );
 
@@ -38,7 +38,7 @@ const Sidebar = () => {
 
   const handleSubmit = () => {
     setApplyFilter(true);
-    closeSidebarFilter();
+    toggleSideFilterMenu();
   };
 
   const handleReset = () => {
@@ -60,7 +60,7 @@ const Sidebar = () => {
       {isSidebarFilterOpen && (
         <div
           onClick={() => {
-            closeSidebarFilter();
+            toggleSideFilterMenu();
             handleReset();
           }}
           className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
@@ -79,7 +79,7 @@ const Sidebar = () => {
           size={40}
           className="text-white cursor-pointer"
           onClick={() => {
-            closeSidebarFilter();
+            toggleSideFilterMenu();
             handleReset();
           }}
         />

@@ -3,8 +3,7 @@ import { create } from "zustand";
 interface State {
   sidebarFilter: {
     isSidebarFilterOpen: boolean;
-    openSidebarFilter: () => void;
-    closeSidebarFilter: () => void;
+    toggleSideFilterMenu: () => void;
   };
   sideMenuDesktop: {
     isSideMenuOpen: boolean;
@@ -19,15 +18,15 @@ interface State {
 export const useUIStore = create<State>()((set, get) => ({
   sidebarFilter: {
     isSidebarFilterOpen: false,
-    openSidebarFilter: () => {
+    toggleSideFilterMenu: () => {
       const { sidebarFilter } = get();
 
-      set({ sidebarFilter: { ...sidebarFilter, isSidebarFilterOpen: true } });
-    },
-    closeSidebarFilter: () => {
-      const { sidebarFilter } = get();
-
-      set({ sidebarFilter: { ...sidebarFilter, isSidebarFilterOpen: false } });
+      set({
+        sidebarFilter: {
+          ...sidebarFilter,
+          isSidebarFilterOpen: !sidebarFilter.isSidebarFilterOpen,
+        },
+      });
     },
   },
   sideMenuDesktop: {

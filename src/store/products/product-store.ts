@@ -1,6 +1,20 @@
-import { ProductStore } from "@/interfaces/products";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+
+export interface ProductStore {
+  filterProduct: {
+    categoryId: number;
+    brandId: string | number;
+    rangePrice: number;
+    maxPrice: number | undefined;
+  };
+  applyFilter: boolean;
+  isLoading: boolean;
+  setFilterProduct: (filterProduct: ProductStore["filterProduct"]) => void;
+  resetFilterProduct: (categoryId?: number) => void;
+  setApplyFilter: (applyFilter: boolean) => void;
+  setIsLoading: (isLoading: boolean) => void;
+}
 
 export const useProductStore = create<ProductStore>()(
   devtools(

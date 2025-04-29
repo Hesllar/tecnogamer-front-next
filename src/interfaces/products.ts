@@ -1,3 +1,5 @@
+import { Category } from "@/categories/interfaces";
+
 export enum EnumCategory {
   "All" = 0,
   "Procesadores" = 1,
@@ -23,25 +25,11 @@ export interface Product {
   brandId: number;
   description?: string;
   stock?: number;
+  category: Category;
 }
 
 export interface Price {
   price: {
     max: number | undefined;
   };
-}
-
-export interface ProductStore {
-  filterProduct: {
-    categoryId: number;
-    brandId: string | number;
-    rangePrice: number;
-    maxPrice: number | undefined;
-  };
-  applyFilter: boolean;
-  isLoading: boolean;
-  setFilterProduct: (filterProduct: ProductStore["filterProduct"]) => void;
-  resetFilterProduct: (categoryId?: number) => void;
-  setApplyFilter: (applyFilter: boolean) => void;
-  setIsLoading: (isLoading: boolean) => void;
 }
