@@ -8,7 +8,7 @@ import * as productsApi from "@/products/helpers";
 import { ProductItem } from "./ProductItem";
 import { useProductStore } from "@/store/products/product-store";
 import ProductGridSkeleton from "./ProductGridSkeleton";
-import { identifyCategoryByURL } from "@/helper";
+import { identifyCategoryIdByURL } from "@/util";
 
 interface Props {
   products: Product[];
@@ -59,7 +59,7 @@ export const ProductsGrid = ({ products = [] }: Props) => {
     /* Actualiza el ID de la categoria en el store de productos */
   }
   useEffect(() => {
-    const categoryId = identifyCategoryByURL(pathname);
+    const categoryId = identifyCategoryIdByURL(pathname);
 
     if (!categoryId) return;
 

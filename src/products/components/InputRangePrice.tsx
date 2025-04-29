@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import { identifyCategoryByURL } from "@/helper";
+import { identifyCategoryIdByURL } from "@/util";
 import * as productApi from "@/products/helpers";
 import { useProductStore } from "@/store/products/product-store";
 import { useUIStore } from "@/store/ui/ui-store";
@@ -26,7 +26,7 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
   }
   useEffect(() => {
     if (isSidebarFilterOpen && filterProduct.maxPrice === undefined) {
-      const categoryId = identifyCategoryByURL(pathname);
+      const categoryId = identifyCategoryIdByURL(pathname);
 
       if (!categoryId) return;
 

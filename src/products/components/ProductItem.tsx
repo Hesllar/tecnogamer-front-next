@@ -1,11 +1,28 @@
 import Image from "next/image";
 import { Product } from "@/interfaces/products";
-import { formatCLP } from "@/util";
+import { formatCLP, mapperCategoryName } from "@/util";
 import ImageNotFound from "../../../public/imagen_no_encontrada.webp";
+import Link from "next/link";
+import clsx from "clsx";
 
-export const ProductItem = ({ id, name, price, images }: Product) => {
+export const ProductItem = ({ id, name, price, images, category }: Product) => {
+  const categoryName = mapperCategoryName(category.name);
+
   return (
-    <div className="flex flex-col justify-between bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
+    <Link
+      href={
+        categoryName
+          ? `${categoryName}/${name.toLowerCase().replaceAll(" ", "-")}`
+          : "#"
+      }
+      className={clsx(
+        "flex flex-col justify-between bg-white shadow-md rounded-lg max-w-xs items-center h-[450px]  dark:bg-zinc-800",
+        {
+          "cursor-pointer": categoryName,
+          "cursor-not-allowed": !categoryName,
+        }
+      )}
+    >
       <div className="w-full flex justify-center items-center h-[250px]">
         <Image
           src={images.length > 0 ? images[0] : ImageNotFound}
@@ -17,7 +34,7 @@ export const ProductItem = ({ id, name, price, images }: Product) => {
       </div>
       <div className="flex flex-col gap-3 px-5 pb-5">
         <h2 className="text-gray-900 font-semibold text-lg tracking-tight dark:text-white">
-          {name}
+          {name.toUpperCase()}
         </h2>
         <div className="flex flex-col gap-2 items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -28,6 +45,6 @@ export const ProductItem = ({ id, name, price, images }: Product) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

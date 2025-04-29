@@ -1,6 +1,6 @@
 import { EnumCategory } from "@/interfaces/products";
 
-export const identifyCategoryByURL = (url: string) => {
+export const identifyCategoryIdByURL = (url: string) => {
   switch (url) {
     case "/products/processors":
       return EnumCategory.Procesadores;

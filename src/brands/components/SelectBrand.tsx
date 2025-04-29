@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Brand } from "../interfaces";
-import { identifyCategoryByURL } from "@/helper";
+import { identifyCategoryIdByURL } from "@/util";
 import * as brandAPI from "@/brands/helper";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
@@ -32,7 +32,7 @@ export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
 
   useEffect(() => {
     if (isSidebarFilterOpen && brands.length < 2) {
-      const categoryId = identifyCategoryByURL(pathname);
+      const categoryId = identifyCategoryIdByURL(pathname);
 
       if (!categoryId) return;
 

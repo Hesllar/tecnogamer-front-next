@@ -15,9 +15,10 @@ export const Filter = () => {
   const { toggleSideFilterMenu } = useUIStore((state) => state.sidebarFilter);
 
   useEffect(() => {
-    const validPaths = pathPermitted.some((path) =>
-      pathname.includes(`/products${path}`)
+    const validPaths = pathPermitted.some(
+      (path) => pathname === `/products${path}`
     );
+
     // Valida si la ruta actual es una de las permitidas
     if (validPaths) {
       setShowFilterButton(true);
