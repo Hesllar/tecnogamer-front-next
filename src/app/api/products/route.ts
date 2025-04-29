@@ -20,7 +20,15 @@ export async function GET(request: Request) {
   let products = [];
 
   if (categoryId === 0) {
-    products = await prisma.product.findMany();
+    products = await prisma.product.findMany({
+      include: {
+        category: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   } else if (brandId) {
     products = await prisma.product.findMany({
       where: {
@@ -30,10 +38,24 @@ export async function GET(request: Request) {
           gte: rangePrice,
         },
       },
+      include: {
+        category: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   } else {
     products = await prisma.product.findMany({
       where: { category_id: categoryId, price: { gte: rangePrice } },
+      include: {
+        category: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   }
 

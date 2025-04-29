@@ -6,6 +6,7 @@ interface FeaturedProduct {
   name: string;
   price: number;
   img_url: string;
+  category_name: string;
 }
 
 export async function GET(request: Request) {
@@ -14,15 +15,26 @@ export async function GET(request: Request) {
     distinct  
     p.id, p."name", 
     p.price, 
-    p.images
+    p.images,
+    c."name" as category_name
   from product p
   inner join order_item oi on p.id = oi.product_id
-  group by p.id, p."name", p.price, p.images
+  inner join category c on c.id = p.category_id 
+  group by p.id, p."name", p.price, p.images, c."name" 
   having count(oi.product_id) > 1`;
 
   if (featuredProducts.length === 0) {
     return NextResponse.json({ message: "No hay productos" }, { status: 404 });
   }
 
-  return NextResponse.json(featuredProducts);
+  const featuredProductsMapper = featuredProducts.map((product) => {
+    return {
+      ...product,
+      category: {
+        name: product.category_name,
+      },
+    };
+  });
+
+  return NextResponse.json(featuredProductsMapper);
 }
