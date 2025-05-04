@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 
-const pathPermitted = ["/towers", "/video-cards", "ram-memory", "processors"];
+const pathPermitted = ["/towers", "/video-cards", "/ram-memory", "/processors"];
 
 export const Filter = () => {
   const [showFilterButton, setShowFilterButton] = useState(false);

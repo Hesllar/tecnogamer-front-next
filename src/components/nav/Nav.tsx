@@ -18,16 +18,23 @@ const items = [
 ];
 
 export const Nav = () => {
-  const { sideMenuMobile } = useUIStore((state) => state);
-
-  const { sideMenuDesktop } = useUIStore((state) => state);
+  const { sideMenuMobile, sideMenuDesktop, sidebarFilter } = useUIStore(
+    (state) => state
+  );
 
   const handleOnClick = () => {
     sideMenuMobile.toggleSideMenu();
   };
   return (
     <>
-      <nav className=" h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50 fixed bg-gradient-cyan-via-green content-center md:px-10 md:static dark:bg-gradient-sunset">
+      <nav
+        className={clsx(
+          "h-14 top-0 w-full mx-auto drop-shadow-lg p-2 z-50  bg-gradient-cyan-via-green content-center md:px-10 md:static dark:bg-gradient-sunset",
+          {
+            ["fixed"]: !sidebarFilter.isSidebarFilterOpen,
+          }
+        )}
+      >
         <div className="flex flex-wrap justify-between items-center w-full">
           <div className="flex items-center justify-between gap-4">
             {!sideMenuDesktop.isSideMenuOpen && (

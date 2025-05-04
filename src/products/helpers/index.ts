@@ -3,14 +3,14 @@ import { Price, Product } from "@/interfaces/products";
 import { env } from "process";
 
 interface GetProductsRequest {
-  categoryId: number;
+  categoryId?: number;
   rangePrice?: number;
   brandId?: number | null | string;
   isClient?: boolean;
 }
 
 export const getProducts = async ({
-  categoryId,
+  categoryId = 0,
   brandId = null,
   rangePrice = 0,
   isClient = false,
@@ -21,6 +21,7 @@ export const getProducts = async ({
     if (!isClient) {
       url = `${env.BASE_URL}/api/products?categoryId=${categoryId}&brandId=${brandId}&minPrice=${rangePrice}`;
     }
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error("Error fetching products");
@@ -63,6 +64,29 @@ export const getPrice = async (categoryId: number): Promise<Price> => {
         max: price._max.price || 0,
       },
     };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    throw error;
+  }
+};
+
+export const getProductByName = async (name: string): Promise<Product> => {
+  try {
+    const response = await fetch(`${env.BASE_URL}/api/products/${name}`, {
+      next: {
+        revalidate: 60 * 60 * 30 * 6,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error fetching product by name");
+    }
+
+    const product: Product = await response.json();
+
+    return product;
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
