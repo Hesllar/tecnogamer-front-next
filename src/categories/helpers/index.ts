@@ -18,3 +18,30 @@ export const getCategories = async (): Promise<Category[]> => {
     return [];
   }
 };
+
+export const getCategoryByName = async (
+  name: string,
+  isClient = false
+): Promise<Category | null> => {
+  try {
+    let url = `${env.BASE_URL}/api/category/${name}`;
+
+    if (isClient) {
+      url = `/api/category/${name}`;
+    }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Error fetching category by name");
+    }
+
+    const categories = await response.json();
+
+    return categories;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return null;
+  }
+};

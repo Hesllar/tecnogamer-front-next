@@ -22,6 +22,8 @@ model category {
   description String?
   created_at  DateTime? @default(dbgenerated("'2025-04-25 10:49:50.386202'::timestamp without time zone")) @db.Timestamp(6)
   updated_at  DateTime? @db.Timestamp(6)
+  image       String?   @db.VarChar
+  is_active   Boolean?  @default(false)
   product     product[]
 }
 

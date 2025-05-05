@@ -1,4 +1,6 @@
 export interface Category {
+  id: string;
   name: string;
-  id?: string;
+  image: string;
+  is_active: boolean;
 }

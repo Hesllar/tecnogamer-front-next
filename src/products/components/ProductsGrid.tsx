@@ -4,17 +4,16 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Product } from "@/interfaces/products";
-import * as productsApi from "@/products/helpers";
+
 import { ProductItem } from "./ProductItem";
 import { useProductStore } from "@/store/products/product-store";
 import ProductGridSkeleton from "./ProductGridSkeleton";
-import { identifyCategoryIdByURL } from "@/util";
+import * as productsAPI from "@/products/helpers";
+import * as categoryAPI from "@/categories/helpers";
 
 interface Props {
   products: Product[];
 }
-
-const arrEmpty = Array.from({ length: 8 });
 
 export const ProductsGrid = ({ products = [] }: Props) => {
   const pathname = usePathname();
@@ -39,8 +38,15 @@ export const ProductsGrid = ({ products = [] }: Props) => {
   useEffect(() => {
     if (applyFilter) {
       setIsLoading(true);
-      productsApi
-        .getProducts({ ...filterProduct, isClient: true })
+
+      if (!filterProduct.categoryId) return;
+
+      productsAPI
+        .getProducts({
+          ...filterProduct,
+          categoryId: filterProduct.categoryId,
+          isClient: true,
+        })
         .then((data) => {
           setInitialProducts(data);
         })
@@ -59,31 +65,49 @@ export const ProductsGrid = ({ products = [] }: Props) => {
     /* Actualiza el ID de la categoria en el store de productos */
   }
   useEffect(() => {
-    const categoryId = identifyCategoryIdByURL(pathname);
-
-    if (!categoryId) return;
-
-    setFilterProduct({
-      ...filterProduct,
-      categoryId: categoryId,
-    });
+    setIsLoading(true);
+    resetFilterProduct();
+    categoryAPI
+      .getCategoryByName(pathname.split("/").at(-1)!, true)
+      .then((category) => {
+        if (!category) {
+          setFilterProduct({
+            ...filterProduct,
+            categoryId: null,
+          });
+          return;
+        }
+        setFilterProduct({
+          ...filterProduct,
+          categoryId: +category?.id!,
+        });
+      })
+      .catch(() => {
+        setFilterProduct({
+          ...filterProduct,
+          categoryId: null,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading && applyFilter) return <ProductGridSkeleton />;
+
+  if (!isLoading && !filterProduct.categoryId) {
+    return (
+      <div>
+        <span className="text-white">Error</span>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
-      {!isLoading ? (
-        <>
-          {initialProducts.map((product) => (
-            <ProductItem key={product.id} {...product} />
-          ))}
-        </>
-      ) : (
-        <>
-          {arrEmpty.map((_, index) => (
-            <ProductGridSkeleton key={index} />
-          ))}
-        </>
-      )}
+      {initialProducts.map((product) => (
+        <ProductItem key={product.id} {...product} />
+      ))}
     </div>
   );
 };

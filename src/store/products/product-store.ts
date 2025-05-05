@@ -3,7 +3,7 @@ import { devtools } from "zustand/middleware";
 
 export interface ProductStore {
   filterProduct: {
-    categoryId: number;
+    categoryId: number | null;
     brandId: string | number;
     rangePrice: number;
     maxPrice: number | undefined;
@@ -20,7 +20,7 @@ export const useProductStore = create<ProductStore>()(
   devtools(
     (set, get) => ({
       filterProduct: {
-        categoryId: 0,
+        categoryId: null,
         brandId: "",
         rangePrice: 0,
         maxPrice: undefined,
@@ -35,6 +35,7 @@ export const useProductStore = create<ProductStore>()(
             ...filterProduct,
             brandId: "",
             rangePrice: 0,
+            maxPrice: undefined,
           },
         });
       },

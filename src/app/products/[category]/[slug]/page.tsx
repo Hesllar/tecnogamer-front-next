@@ -8,13 +8,17 @@ import { formatCLP } from "@/util";
 interface Props {
   params: { slug: string };
 }
+export async function generateStaticParams() {
+  const getAllProducts = await productAPI.getProducts({});
 
-export default async function VideoCardSinglePage({ params }: Props) {
+  return getAllProducts.map((product) => ({ slug: product.name }));
+}
+
+export default async function ProductSinglePage({ params }: Props) {
   const getProductByNameData = await productAPI.getProductByName(params.slug);
 
-  if (!getProductByNameData) {
-    notFound();
-  }
+  if (!getProductByNameData) notFound();
+
   const { name, images, brand, stock, price, id } = getProductByNameData;
   return (
     <div className="flex flex-row h-[600px] mt-32 md:mt-0 gap-4 max-[1090px]:flex-col min-[1090px]:gap-0">

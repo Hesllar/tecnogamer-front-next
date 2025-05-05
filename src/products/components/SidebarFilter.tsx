@@ -9,7 +9,7 @@ import { useProductStore } from "@/store/products/product-store";
 import { SelectBrand } from "@/brands/components/SelectBrand";
 import { InputRangePrice } from "./InputRangePrice";
 
-const Sidebar = () => {
+export const SidebarFilter = () => {
   {
     /*Gestor de estados de productos */
   }
@@ -117,10 +117,4 @@ const Sidebar = () => {
       </div>
     </>
   );
-};
-
-export const SidebarFilter = () => {
-  const pathname = usePathname();
-
-  return pathname !== "/products" ? <Sidebar /> : null;
 };

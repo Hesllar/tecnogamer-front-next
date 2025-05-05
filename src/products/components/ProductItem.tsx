@@ -1,21 +1,27 @@
 import Image from "next/image";
 import { Product } from "@/interfaces/products";
-import { formatCLP, mapperCategoryName } from "@/util";
+import { formatCLP } from "@/util";
 import ImageNotFound from "../../../public/imagen_no_encontrada.webp";
 import Link from "next/link";
 
-export const ProductItem = ({ id, name, price, images, category }: Product) => {
-  const categoryName = mapperCategoryName(category!.name);
+export const ProductItem = ({ name, price, images, category }: Product) => {
+  const productNameFormatted = name.toLowerCase().replaceAll(" ", "-");
+
+  const categoryNameFormatted = category?.name
+    .toLowerCase()
+    .replaceAll(" ", "-");
 
   return (
     <div className="flex flex-col bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
       <Link
         href={
-          categoryName
-            ? `${categoryName}/${name.toLowerCase().replaceAll(" ", "-")}`
+          category?.is_active
+            ? `${categoryNameFormatted}/${productNameFormatted}`
             : "#"
         }
-        className={categoryName ? "cursor-pointer" : "cursor-not-allowed"}
+        className={
+          category?.is_active ? "cursor-pointer" : "cursor-not-allowed"
+        }
       >
         <div className="w-full flex justify-center items-center h-[250px]">
           <Image

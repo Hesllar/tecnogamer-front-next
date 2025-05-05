@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 
-import { identifyCategoryIdByURL } from "@/util";
 import * as productApi from "@/products/helpers";
 import { useProductStore } from "@/store/products/product-store";
 import { useUIStore } from "@/store/ui/ui-store";
@@ -15,8 +13,6 @@ interface Props {
 }
 
 export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
-  const pathname = usePathname();
-
   const { isSidebarFilterOpen } = useUIStore((state) => state.sidebarFilter);
 
   const { filterProduct, setFilterProduct } = useProductStore((state) => state);
@@ -26,12 +22,8 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
   }
   useEffect(() => {
     if (isSidebarFilterOpen && filterProduct.maxPrice === undefined) {
-      const categoryId = identifyCategoryIdByURL(pathname);
-
-      if (!categoryId) return;
-
       productApi
-        .getPrice(categoryId)
+        .getPrice(filterProduct.categoryId!)
         .then(({ price }) => {
           setFilterProduct({
             ...filterProduct,

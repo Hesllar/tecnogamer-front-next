@@ -72,7 +72,9 @@ export const getPrice = async (categoryId: number): Promise<Price> => {
   }
 };
 
-export const getProductByName = async (name: string): Promise<Product> => {
+export const getProductByName = async (
+  name: string
+): Promise<Product | null> => {
   try {
     const response = await fetch(`${env.BASE_URL}/api/products/${name}`, {
       next: {
@@ -91,7 +93,7 @@ export const getProductByName = async (name: string): Promise<Product> => {
     if (error instanceof Error) {
       console.error(error.message);
     }
-    throw error;
+    return null;
   }
 };
 

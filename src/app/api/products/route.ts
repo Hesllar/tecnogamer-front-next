@@ -25,6 +25,7 @@ export async function GET(request: Request) {
         category: {
           select: {
             name: true,
+            is_active: true,
           },
         },
       },
@@ -42,6 +43,7 @@ export async function GET(request: Request) {
         category: {
           select: {
             name: true,
+            is_active: true,
           },
         },
       },
@@ -53,6 +55,7 @@ export async function GET(request: Request) {
         category: {
           select: {
             name: true,
+            is_active: true,
           },
         },
       },

@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 import { Brand } from "../interfaces";
-import { identifyCategoryIdByURL } from "@/util";
-import * as brandAPI from "@/brands/helper";
 import { useUIStore } from "@/store/ui/ui-store";
-import clsx from "clsx";
+import { useProductStore } from "@/store/products/product-store";
+import * as brandAPI from "@/brands/helper";
 
 interface Props {
   handleOnchange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -17,7 +16,7 @@ interface Props {
 export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
   const { isSidebarFilterOpen } = useUIStore((state) => state.sidebarFilter);
 
-  const pathname = usePathname();
+  const { categoryId } = useProductStore((state) => state.filterProduct);
 
   const [brands, setBrands] = useState<Brand[]>([
     {
@@ -32,12 +31,8 @@ export const SelectBrand = ({ handleOnchange, valueSelect }: Props) => {
 
   useEffect(() => {
     if (isSidebarFilterOpen && brands.length < 2) {
-      const categoryId = identifyCategoryIdByURL(pathname);
-
-      if (!categoryId) return;
-
       brandAPI
-        .getBrands(categoryId)
+        .getBrands(categoryId!)
         .then((brands) => {
           if (brands.length === 0) {
             setBrands([]);
