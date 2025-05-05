@@ -29,7 +29,7 @@ export const ProductSlideShow = ({ images }: Props) => {
           </div>
         ))}
       </div>
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex justify-center">
         <Image
           src={imageActive}
           alt={imageActive}

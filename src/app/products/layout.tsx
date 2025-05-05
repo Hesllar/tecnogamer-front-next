@@ -14,7 +14,7 @@ export default async function ProductLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <Filter />
       <SidebarFilter />
       {children}

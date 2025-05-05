@@ -1,3 +1,4 @@
+import { Brand } from "@/brands/interfaces";
 import { Category } from "@/categories/interfaces";
 
 export enum EnumCategory {
@@ -25,7 +26,8 @@ export interface Product {
   brandId: number;
   description?: string;
   stock?: number;
-  category: Category;
+  category?: Category;
+  brand?: Brand;
 }
 
 export interface Price {

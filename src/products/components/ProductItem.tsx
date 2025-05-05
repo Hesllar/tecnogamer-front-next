@@ -5,7 +5,7 @@ import ImageNotFound from "../../../public/imagen_no_encontrada.webp";
 import Link from "next/link";
 
 export const ProductItem = ({ id, name, price, images, category }: Product) => {
-  const categoryName = mapperCategoryName(category.name);
+  const categoryName = mapperCategoryName(category!.name);
 
   return (
     <div className="flex flex-col bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">

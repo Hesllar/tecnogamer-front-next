@@ -9,6 +9,13 @@ interface Segments {
 
 export async function GET(request: Request, { params }: Segments) {
   const product = await prisma.product.findFirst({
+    include: {
+      brand: {
+        select: {
+          name: true,
+        },
+      },
+    },
     where: {
       name: params.name.toLowerCase().replace(/-/g, " "),
     },
