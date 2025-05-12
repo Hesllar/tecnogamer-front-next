@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import clsx from "clsx";
@@ -8,12 +8,15 @@ import { useUIStore } from "@/store/ui/ui-store";
 import { useProductStore } from "@/store/products/product-store";
 import { SelectBrand } from "@/brands/components/SelectBrand";
 import { InputRangePrice } from "./InputRangePrice";
+import * as categoryAPI from "@/categories/helpers";
 
 export const SidebarFilter = () => {
+  const pathName = usePathname();
   {
     /*Gestor de estados de productos */
   }
   const {
+    applyFilter,
     filterProduct,
     setApplyFilter,
     setFilterProduct,
@@ -43,7 +46,6 @@ export const SidebarFilter = () => {
 
   const handleReset = () => {
     if (filterProduct.brandId === "" && filterProduct.rangePrice === 0) return;
-
     resetFilterProduct();
   };
 
@@ -53,6 +55,45 @@ export const SidebarFilter = () => {
     }
     return false;
   };
+
+  {
+    /* Actualiza el ID de la categoria en el store de productos */
+  }
+  useEffect(() => {
+    if (isSidebarFilterOpen && !filterProduct.categoryId) {
+      categoryAPI
+        .getCategoryByName(pathName.split("/").at(-1)!, true)
+        .then((category) => {
+          if (!category) {
+            setFilterProduct({
+              ...filterProduct,
+              categoryId: null,
+            });
+            return;
+          }
+          setFilterProduct({
+            ...filterProduct,
+            categoryId: +category?.id!,
+          });
+        })
+        .catch(() => {
+          setFilterProduct({
+            ...filterProduct,
+            categoryId: null,
+          });
+        })
+        .finally(() => {});
+    }
+  }, [isSidebarFilterOpen]);
+
+  useEffect(() => {
+    setFilterProduct({
+      categoryId: null,
+      brandId: "",
+      rangePrice: 0,
+      maxPrice: undefined,
+    });
+  }, [pathName]);
 
   return (
     <>

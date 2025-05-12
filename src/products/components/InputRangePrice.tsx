@@ -13,15 +13,13 @@ interface Props {
 }
 
 export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
-  const { isSidebarFilterOpen } = useUIStore((state) => state.sidebarFilter);
-
   const { filterProduct, setFilterProduct } = useProductStore((state) => state);
 
   {
     /* Obtengo el precio maximo de los productos */
   }
   useEffect(() => {
-    if (isSidebarFilterOpen && filterProduct.maxPrice === undefined) {
+    if (filterProduct.maxPrice === undefined && filterProduct.categoryId) {
       productApi
         .getPrice(filterProduct.categoryId!)
         .then(({ price }) => {
@@ -37,7 +35,7 @@ export const InputRangePrice = ({ rangePrice, handleOnchange }: Props) => {
           });
         });
     }
-  }, [isSidebarFilterOpen]);
+  }, [filterProduct.categoryId]);
   return (
     <div>
       <span className="font-semibold text-white">

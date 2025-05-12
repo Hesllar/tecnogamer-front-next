@@ -15,6 +15,6 @@ export const getBrands = async (categoryId: number): Promise<Brand[]> => {
     if (error instanceof Error) {
       console.error(error.message);
     }
-    return [];
+    throw error;
   }
 };

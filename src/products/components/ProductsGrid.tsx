@@ -10,6 +10,7 @@ import { useProductStore } from "@/store/products/product-store";
 import ProductGridSkeleton from "./ProductGridSkeleton";
 import * as productsAPI from "@/products/helpers";
 import * as categoryAPI from "@/categories/helpers";
+// import { ErrorComponent } from "@/components";
 
 interface Props {
   products: Product[];
@@ -28,8 +29,8 @@ export const ProductsGrid = ({ products = [] }: Props) => {
     applyFilter,
     resetFilterProduct,
     setIsLoading,
-    setFilterProduct,
   } = useProductStore((state) => state);
+
   const [initialProducts, setInitialProducts] = useState(products);
 
   {
@@ -61,47 +62,17 @@ export const ProductsGrid = ({ products = [] }: Props) => {
     }
   }, [applyFilter]);
 
-  {
-    /* Actualiza el ID de la categoria en el store de productos */
-  }
-  useEffect(() => {
-    setIsLoading(true);
-    resetFilterProduct();
-    categoryAPI
-      .getCategoryByName(pathname.split("/").at(-1)!, true)
-      .then((category) => {
-        if (!category) {
-          setFilterProduct({
-            ...filterProduct,
-            categoryId: null,
-          });
-          return;
-        }
-        setFilterProduct({
-          ...filterProduct,
-          categoryId: +category?.id!,
-        });
-      })
-      .catch(() => {
-        setFilterProduct({
-          ...filterProduct,
-          categoryId: null,
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
   if (isLoading && applyFilter) return <ProductGridSkeleton />;
 
-  if (!isLoading && !filterProduct.categoryId) {
-    return (
-      <div>
-        <span className="text-white">Error</span>
-      </div>
-    );
-  }
+  // if (!isLoading && !filterProduct.categoryId) {
+  //   return (
+  //     <ErrorComponent
+  //       message="Error al cargar los datos"
+  //       details="No pudimos conectar con el servidor. Verifica tu conexión a internet e intenta nuevamente."
+  //       onRetry={() => {}}
+  //     />
+  //   );
+  // }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">

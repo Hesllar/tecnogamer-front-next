@@ -1,16 +1,11 @@
 "use client";
 
 import { useUIStore } from "@/store/ui/ui-store";
-import { useProductStore } from "@/store/products/product-store";
 
 import { FaFilter } from "react-icons/fa";
 
 export const Filter = () => {
   const { toggleSideFilterMenu } = useUIStore((state) => state.sidebarFilter);
-
-  const { categoryId } = useProductStore((state) => state.filterProduct);
-
-  if (!categoryId) return null;
 
   return (
     <div className="flex justify-end mt-10 mr-8 md:mt-0 md:mr-0">

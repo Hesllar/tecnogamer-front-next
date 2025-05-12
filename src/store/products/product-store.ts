@@ -35,7 +35,6 @@ export const useProductStore = create<ProductStore>()(
             ...filterProduct,
             brandId: "",
             rangePrice: 0,
-            maxPrice: undefined,
           },
         });
       },
