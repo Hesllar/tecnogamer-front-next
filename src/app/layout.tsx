@@ -19,14 +19,18 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${inter.className} h-screen overflow-hidden dark:bg-gradient-to-br from-black via-black to-purple-950`}
+        className={`${inter.className} flex flex-col gap-6 min-h-dvh dark:bg-gradient-to-br from-black via-black to-purple-950`}
       >
-        <div className="flex">
-          <Sidebar />
-          <div className="flex-1 overflow-y-auto h-screen">
-            <Nav />
-            <div className="px-0 py-10 md:p-5">{children}</div>
+        {/* <Sidebar /> */}
+        <main className="flex-1 mt-20">
+          <Nav />
+          <div className="flex justify-center w-full">
+            <div className="xl:w-[1360px]">{children}</div>
           </div>
+        </main>
+
+        <div className="bg-red-600">
+          <span>Footer</span>
         </div>
       </body>
     </html>
