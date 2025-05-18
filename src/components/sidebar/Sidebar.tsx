@@ -1,69 +1,76 @@
 "use client";
 
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaMemory } from "react-icons/fa";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 
 import { IoMdCube, IoIosKeypad } from "react-icons/io";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
+import { Category } from "@/categories/interfaces";
+import { BsGpuCard } from "react-icons/bs";
+import { GiProcessor } from "react-icons/gi";
+import { PiComputerTower } from "react-icons/pi";
 
-const sidebar = [
-  {
-    name: "Inicio",
-    icon: <IoIosKeypad size={40} />,
-    path: "/",
-  },
-  {
-    name: "Productos",
-    icon: <IoMdCube size={40} />,
-    path: "/products",
-  },
-];
+interface Props {
+  categories: Category[];
+}
 
-export const Sidebar = () => {
+const icons = {
+  2: { id: 2, icon: <BsGpuCard /> },
+  1: { id: 1, icon: <GiProcessor /> },
+  11: { id: 11, icon: <PiComputerTower /> },
+  4: { id: 4, icon: <FaMemory /> },
+};
+
+export const Sidebar = ({ categories }: Props) => {
   const { isSideMenuOpen, toggleSideMenu } = useUIStore(
     (state) => state.sideMenuDesktop
   );
 
+  const categoriesMapper = categories.map((category) => {
+    const parserID = Number(category.id);
+    if (parserID === icons[parserID as keyof typeof icons].id) {
+      return {
+        ...category,
+        icon: icons[parserID as keyof typeof icons].icon,
+      };
+    }
+    return {
+      ...category,
+      icon: null,
+    };
+  });
+
   return (
-    <div
-      id="sidebar"
-      className={clsx(
-        " bg-white h-screen w-0 block left-0 shadow-xl overflow-x-hidden transform transition-all duration-500 ease-in-out dark:bg-gradient-to-b from-black to-orange-300",
-        {
-          "-translate-x-52 md:w-0 px-0": !isSideMenuOpen,
-          "w-0 px-0 md:w-80 md:px-3": isSideMenuOpen,
-        }
-      )}
-      x-show="sidenav"
-    >
-      <div className="w-full flex justify-end items-center mt-4 ">
-        <FaArrowLeft
-          size={35}
-          className="text-white cursor-pointer"
+    <>
+      {isSideMenuOpen && (
+        <div
           onClick={toggleSideMenu}
+          className="fade-in fixed w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
         />
-      </div>
-      <div className="space-y-6 md:space-y-10 mt-10">
-        <div id="profile" className="space-y-3">
-          <img
-            src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-            alt="Avatar user"
-            className="w-10 md:w-16 rounded-full mx-auto"
-          />
-          <div>
-            <h2 className="font-medium text-xs md:text-xl text-center text-teal-500">
-              Eduard Pantazi
-            </h2>
-            <p className="text-md text-gray-500 text-center">Administrator</p>
-          </div>
-        </div>
-        <div id="menu" className="flex flex-col gap-4 space-y-2">
+      )}
+
+      <div
+        className={clsx(
+          "fixed overflow-hidden p-5 left-0 top-14 w-[350px] h-screen bg-gradient-to-br from-teal-900 via-teal-700 to-teal-400 z-30 transition-transform duration-200 ease-in-out",
+          {
+            "translate-x-[-100%] shadow-[0px_0_0px_0_rgba(15,194,205)]":
+              !isSideMenuOpen,
+            "shadow-[6px_0_6px_0_rgba(15,194,205)]": isSideMenuOpen,
+          }
+        )}
+      >
+        <div className=" flex flex-col gap-2 space-y-6 md:space-y-10 mt-10">
+          {categoriesMapper.map((category) => (
+            <SidebarMenuItem key={category.id} {...category} />
+          ))}
+          {/* <div id="menu" className="flex flex-col gap-4 space-y-2">
           {sidebar.map((item) => (
             <SidebarMenuItem key={item.path} {...item} />
           ))}
+        </div> */}
         </div>
       </div>
-    </div>
+    </>
   );
 };

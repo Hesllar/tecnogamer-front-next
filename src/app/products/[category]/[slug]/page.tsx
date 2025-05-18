@@ -21,9 +21,9 @@ export default async function ProductSinglePage({ params }: Props) {
 
   const { name, images, brand, stock, price, id } = getProductByNameData;
   return (
-    <div className="flex flex-row h-[600px] mt-32 md:mt-0 gap-4 max-[1090px]:flex-col min-[1090px]:gap-0">
+    <div className="flex flex-col items-center mt-32 gap-4 md:mt-9 sm:flex-row sm:items-start">
       <ProductSlideShow images={images} />
-      <div className=" flex flex-col gap-2 bg-gradient-to-r from-gray-300 via-white to-gray-300 w-1/4 rounded-lg p-5 max-h-fit">
+      <div className=" flex flex-col gap-2 bg-gradient-to-r from-gray-300 via-white to-gray-300 w-full sm:w-2/4 lg:w-1/4 rounded-lg p-5 max-h-fit">
         <h1 className="text-lg font-bold capitalize">{brand?.name ?? ""}</h1>
         <h2 className="text-2xl font-bold capitalize">{name}</h2>
         <p className="text-lg font-semibold">

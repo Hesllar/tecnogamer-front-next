@@ -110,7 +110,7 @@ export const SidebarFilter = () => {
 
       <div
         className={clsx(
-          "fixed p-5 right-0 top-0 w-[350px] h-screen bg-amber-700 z-20 shadow-2xl transition-transform duration-300 ease-in-out",
+          "fixed p-5 right-0 top-14 w-[350px] h-screen bg-amber-700 z-30 shadow-2xl transition-transform duration-300 ease-in-out",
           {
             "translate-x-full": !isSidebarFilterOpen,
           }

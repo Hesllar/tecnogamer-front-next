@@ -9,10 +9,6 @@ interface State {
     isSideMenuOpen: boolean;
     toggleSideMenu: () => void;
   };
-  sideMenuMobile: {
-    isSideMenuOpen: boolean;
-    toggleSideMenu: () => void;
-  };
 }
 
 export const useUIStore = create<State>()((set, get) => ({
@@ -30,7 +26,7 @@ export const useUIStore = create<State>()((set, get) => ({
     },
   },
   sideMenuDesktop: {
-    isSideMenuOpen: true,
+    isSideMenuOpen: false,
     toggleSideMenu: () => {
       const { sideMenuDesktop } = get();
 
@@ -38,19 +34,6 @@ export const useUIStore = create<State>()((set, get) => ({
         sideMenuDesktop: {
           ...sideMenuDesktop,
           isSideMenuOpen: !sideMenuDesktop.isSideMenuOpen,
-        },
-      });
-    },
-  },
-  sideMenuMobile: {
-    isSideMenuOpen: false,
-    toggleSideMenu: () => {
-      const { sideMenuMobile } = get();
-
-      set({
-        sideMenuMobile: {
-          ...sideMenuMobile,
-          isSideMenuOpen: !sideMenuMobile.isSideMenuOpen,
         },
       });
     },

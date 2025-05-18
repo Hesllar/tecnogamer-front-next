@@ -1,45 +1,23 @@
 "use client";
 
-import { useUIStore } from "@/store/ui/ui-store";
+import { Category } from "@/categories/interfaces";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IoArrowForward } from "react-icons/io5";
 
-interface Props {
-  path: string;
-  name: string;
-  itemsLength: number;
-  index: number;
-}
-
-export const NavItems = ({ path, name, itemsLength, index }: Props) => {
-  const { toggleSideMenu } = useUIStore((state) => state.sideMenuMobile);
+export const NavItems = ({ name }: Category) => {
   const pathname = usePathname();
-  const isActive = pathname === path;
+  const formattedName = `/products/${name.replaceAll(" ", "-").toLowerCase()}`;
+
+  const isActive = pathname === formattedName;
   return (
     <Link
-      onClick={toggleSideMenu}
-      href={path}
-      key={name}
-      className={clsx(
-        `h-10 content-center cursor-pointer ${
-          itemsLength - (index + 1) !== 0
-            ? "border-b-2 border-black"
-            : undefined
-        }`,
-        {
-          "bg-gradient-cyan-via-green_custom_2 dark:bg-gradient-sunset-custom_2":
-            isActive,
-          "bg-gradient-cyan-via-green_custom_1 dark:bg-gradient-sunset-custom_1":
-            !isActive,
-        }
-      )}
+      href={formattedName}
+      className={`cursor-pointer p-4 hover:bg-purple-900 ${
+        isActive ? " bg-purple-900" : ""
+      }`}
     >
-      <div className="flex items-center justify-center gap-6">
-        {isActive && <IoArrowForward fontSize={25} className=" text-white" />}
-        <span className="text-white text-lg font-semibold">{name}</span>
-      </div>
+      <span className={`font-semibold text-lg text-white`}>{name}</span>
     </Link>
   );
 };
