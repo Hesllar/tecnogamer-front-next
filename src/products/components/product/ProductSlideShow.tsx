@@ -11,7 +11,7 @@ export const ProductSlideShow = ({ images }: Props) => {
   const [imageActive, setImageActive] = useState(images[0]);
 
   return (
-    <div className="flex w-full md:w-3/4 gap-4 flex-col-reverse min-[1400px]:flex-row min-[1400px]:gap-0">
+    <div className=" hidden w-full sm:flex md:w-3/4 gap-4 flex-col-reverse min-[1400px]:flex-row min-[1400px]:gap-0">
       <div className="flex flex-row justify-center min-[1400px]:flex-col min-[1400px]:justify-normal gap-2 p-2">
         {images.map((urlIamge) => (
           <div

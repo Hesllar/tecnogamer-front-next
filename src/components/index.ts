@@ -9,3 +9,5 @@ export { Header } from "./header/Header";
 export { Footer } from "./footer/Footer";
 
 export { Nav } from "./nav/Nav";
+
+export { Carrousel } from "./carrousel/Carrousel";
