@@ -47,19 +47,20 @@ model order_item {
 }
 
 model product {
-  id          Int             @id @default(autoincrement())
-  name        String?         @unique @db.VarChar(200)
-  price       Decimal?        @db.Decimal(10, 2)
-  status      product_status?
-  stock       Int?
-  category_id Int?
-  brand_id    Int?
-  created_at  DateTime?       @default(dbgenerated("'2025-04-25 10:49:50.386202'::timestamp without time zone")) @db.Timestamp(6)
-  updated_at  DateTime?       @db.Timestamp(6)
-  images      Json?           @default("[]")
-  order_item  order_item[]
-  brand       brand?          @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  category    category?       @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id             Int             @id @default(autoincrement())
+  name           String?         @unique @db.VarChar(200)
+  price          Decimal?        @db.Decimal(10, 2)
+  status         product_status?
+  stock          Int?
+  category_id    Int?
+  brand_id       Int?
+  created_at     DateTime?       @default(dbgenerated("'2025-04-25 10:49:50.386202'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at     DateTime?       @db.Timestamp(6)
+  images         Json?           @default("[]")
+  specifications Json?
+  order_item     order_item[]
+  brand          brand?          @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  category       category?       @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model role_user {
