@@ -24,6 +24,7 @@ export interface Product {
   images: string[];
   categoryId: number;
   brandId: number;
+  specifications: { [key: string]: string | number } | null;
   description?: string;
   stock?: number;
   category?: Category;
