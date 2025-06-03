@@ -19,6 +19,7 @@ export enum EnumCategory {
 export interface Product {
   id: number;
   name: string;
+  namenormalized: string;
   price: number;
   status: string;
   images: string[];

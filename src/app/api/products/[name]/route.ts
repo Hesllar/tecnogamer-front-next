@@ -17,7 +17,10 @@ export async function GET(request: Request, { params }: Segments) {
       },
     },
     where: {
-      name: params.name.toLowerCase().replace(/-/g, " "),
+      OR: [
+        { name: params.name.toLowerCase().replace(/-/g, " ") },
+        { namenormalized: params.name.toLowerCase().replace(/-/g, " ") },
+      ],
     },
   });
 

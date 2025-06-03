@@ -13,7 +13,9 @@ interface Props {
 export async function generateStaticParams() {
   const getAllProducts = await productAPI.getProducts({});
 
-  return getAllProducts.map((product) => ({ slug: product.name }));
+  return getAllProducts.map((product) => ({
+    slug: product.name,
+  }));
 }
 
 export default async function ProductSinglePage({ params }: Props) {

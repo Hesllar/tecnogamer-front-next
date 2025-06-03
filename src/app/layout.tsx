@@ -29,6 +29,7 @@ export default async function RootLayout({
         <Nav categories={getCategories} />
         {/* Versión mobile */}
         <Sidebar categories={getCategories} />
+
         <main className="flex-1 px-6 md:px-0">
           <div className="flex justify-center w-full">
             <div className="w-full md:w-10/12 2xl:w-full 2xl:max-w-[1360px]">

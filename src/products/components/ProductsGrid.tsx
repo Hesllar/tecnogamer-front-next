@@ -17,8 +17,6 @@ interface Props {
 }
 
 export const ProductsGrid = ({ products = [] }: Props) => {
-  const pathname = usePathname();
-
   {
     /*Gestor de estados de productos */
   }

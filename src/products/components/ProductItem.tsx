@@ -4,8 +4,16 @@ import { formatCLP } from "@/util";
 import ImageNotFound from "../../../public/imagen_no_encontrada.webp";
 import Link from "next/link";
 
-export const ProductItem = ({ name, price, images, category }: Product) => {
-  const productNameFormatted = name.toLowerCase().replaceAll(" ", "-");
+export const ProductItem = ({
+  name,
+  namenormalized,
+  price,
+  images,
+  category,
+}: Product) => {
+  const productNameFormatted = (namenormalized ?? name)
+    .toLowerCase()
+    .replaceAll(" ", "-");
 
   const categoryNameFormatted = category?.name
     .toLowerCase()
