@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Header, Nav, Sidebar } from "@/components";
 import * as categoryAPI from "@/categories/helpers";
+import { Breadcrumbs } from "@/components/breadcrumbs/Breadcrumbs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,8 @@ export default async function RootLayout({
 
         <main className="flex-1 px-6 md:px-0">
           <div className="flex justify-center w-full">
-            <div className="w-full md:w-10/12 2xl:w-full 2xl:max-w-[1360px]">
+            <div className="w-full mt-12 md:mt-0 md:w-10/12 2xl:w-full 2xl:max-w-[1360px]">
+              <Breadcrumbs />
               {children}
             </div>
           </div>
