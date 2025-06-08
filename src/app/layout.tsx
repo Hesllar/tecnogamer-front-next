@@ -20,6 +20,18 @@ export default async function RootLayout({
 }>) {
   const getCategories = await categoryAPI.getCategories();
 
+  const addSubCategories = getCategories.map(async (category) => {
+    const subCategories = await categoryAPI.getSubCategoriesByParentId(
+      +category.id
+    );
+    return {
+      ...category,
+      subCategories: subCategories ?? [],
+    };
+  });
+
+  const resolvedSubCategories = await Promise.all(addSubCategories);
+
   return (
     <html lang="es">
       <body
@@ -27,9 +39,9 @@ export default async function RootLayout({
       >
         <Header />
         {/* Versión desktop */}
-        <Nav categories={getCategories} />
+        <Nav categories={resolvedSubCategories} />
         {/* Versión mobile */}
-        <Sidebar categories={getCategories} />
+        <Sidebar categories={resolvedSubCategories} />
 
         <main className="flex-1 px-6 md:px-0">
           <div className="flex justify-center w-full">

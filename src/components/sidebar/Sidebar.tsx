@@ -12,7 +12,13 @@ import { GiProcessor } from "react-icons/gi";
 import { PiComputerTower } from "react-icons/pi";
 
 interface Props {
-  categories: Category[];
+  categories: {
+    id: string;
+    name: string;
+    image: string;
+    is_active: boolean;
+    subCategory?: Category[];
+  }[];
 }
 
 const icons = {

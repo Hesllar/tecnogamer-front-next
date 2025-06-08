@@ -22,7 +22,7 @@ export const SidebarMenuItem = ({ name, icon }: Props) => {
       onClick={toggleSideMenu}
       href={formattedName}
       className={clsx("text-2xl font-medium text-white p-4 rounded-md", {
-        "bg-purple-900": isActive,
+        "shadow-2xl backdrop-blur-3xl": isActive,
       })}
     >
       <div className="flex gap-3 items-center">

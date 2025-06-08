@@ -45,3 +45,30 @@ export const getCategoryByName = async (
     return null;
   }
 };
+
+export const getSubCategoriesByParentId = async (
+  id: number,
+  isClient = false
+): Promise<Category[] | null> => {
+  try {
+    let url = `${env.BASE_URL}/api/category/sub-category/${id}`;
+
+    if (isClient) {
+      url = `/api/category/sub-category/${id}`;
+    }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Error fetching sub category by parent ID");
+    }
+
+    const subCategories = await response.json();
+
+    return subCategories;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return null;
+  }
+};
