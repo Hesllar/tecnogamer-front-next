@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const categories = await prisma.category.findMany({
-    where: { is_active: true },
+    where: { is_active: true, parent_category_id: null },
   });
 
   if (categories.length === 0) {
