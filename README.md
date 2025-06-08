@@ -32,4 +32,5 @@ password:123
 npx prisma init
 npx prisma migrate dev
 npx prisma generate
+npx prisma db pull
 ```
