@@ -17,14 +17,19 @@ model brand {
 }
 
 model category {
-  id          Int       @id @default(autoincrement())
-  name        String?   @unique @db.VarChar(200)
-  description String?
-  created_at  DateTime? @default(dbgenerated("'2025-04-25 10:49:50.386202'::timestamp without time zone")) @db.Timestamp(6)
-  updated_at  DateTime? @db.Timestamp(6)
-  image       String?   @db.VarChar
-  is_active   Boolean?  @default(false)
-  product     product[]
+  id                 Int        @id @default(autoincrement())
+  name               String?    @unique @db.VarChar(200)
+  description        String?
+  created_at         DateTime?  @default(dbgenerated("'2025-04-25 10:49:50.386202'::timestamp without time zone")) @db.Timestamp(6)
+  updated_at         DateTime?  @db.Timestamp(6)
+  image              String?    @db.VarChar
+  is_active          Boolean?   @default(false)
+  parent_category_id Int?
+  category           category?  @relation("categoryTocategory", fields: [parent_category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent_category")
+  other_category     category[] @relation("categoryTocategory")
+  product            product[]
+
+  @@index([parent_category_id])
 }
 
 model order {
