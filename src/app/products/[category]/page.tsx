@@ -19,9 +19,9 @@ export default async function ProductsByCategoryPage({ params }: Props) {
 
   if (!getCategory) notFound();
 
-  const getProductsByCategory = await productsAPI.getProducts({
-    categoryId: +getCategory.id,
-  });
+  const getProductsByCategory = await productsAPI.getProductsByParentCategoryId(
+    +getCategory.id
+  );
 
   return (
     <div className="flex gap-4 pt-12 md:pt-8">

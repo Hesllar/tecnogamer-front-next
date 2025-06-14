@@ -14,7 +14,10 @@ export const ProductSpecification = ({ specefication }: Props) => {
         <div className="p-6">
           <div className="space-y-1">
             {Object.entries(specefication).map(([key, value]) => (
-              <div className="grid grid-cols-2 gap-4 py-4 px-4 hover:bg-slate-800 rounded-lg transition-colors group">
+              <div
+                key={key}
+                className="grid grid-cols-2 gap-4 py-4 px-4 hover:bg-slate-800 rounded-lg transition-colors group"
+              >
                 <span className="text-slate-400 font-medium capitalize group-hover:text-slate-300">
                   {key.replaceAll("_", " ")}
                 </span>

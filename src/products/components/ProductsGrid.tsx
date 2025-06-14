@@ -34,6 +34,32 @@ export const ProductsGrid = ({ products = [] }: Props) => {
   {
     /*Manda la data de los productos filtrados al endpoint */
   }
+  // useEffect(() => {
+  //   if (applyFilter) {
+  //     setIsLoading(true);
+
+  //     if (!filterProduct.categoryId) return;
+
+  //     productsAPI
+  //       .getProducts({
+  //         ...filterProduct,
+  //         categoryId: filterProduct.categoryId,
+  //         isClient: true,
+  //       })
+  //       .then((data) => {
+  //         setInitialProducts(data);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching products:", error);
+  //       })
+  //       .finally(() => {
+  //         setApplyFilter(false);
+  //         setIsLoading(false);
+  //         resetFilterProduct();
+  //       });
+  //   }
+  // }, [applyFilter]);
+
   useEffect(() => {
     if (applyFilter) {
       setIsLoading(true);
@@ -41,11 +67,7 @@ export const ProductsGrid = ({ products = [] }: Props) => {
       if (!filterProduct.categoryId) return;
 
       productsAPI
-        .getProducts({
-          ...filterProduct,
-          categoryId: filterProduct.categoryId,
-          isClient: true,
-        })
+        .getProductsBySubCategoryId(filterProduct.categoryId)
         .then((data) => {
           setInitialProducts(data);
         })

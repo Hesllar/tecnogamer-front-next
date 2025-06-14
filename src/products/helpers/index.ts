@@ -117,3 +117,47 @@ export const getFeaturedProducts = async (): Promise<Product[]> => {
     return [];
   }
 };
+
+export const getProductsByParentCategoryId = async (
+  parentCategoryId: number
+): Promise<Product[]> => {
+  try {
+    const response = await fetch(
+      `${env.BASE_URL}/api/products/category/${parentCategoryId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error fetching featured products by category ID");
+    }
+
+    const products = await response.json();
+
+    return products;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return [];
+  }
+};
+
+export const getProductsBySubCategoryId = async (
+  subCategory: number
+): Promise<Product[]> => {
+  try {
+    const response = await fetch(`/api/products/sub-category/${subCategory}`);
+
+    if (!response.ok) {
+      throw new Error("Error fetching featured products by sub category ID");
+    }
+
+    const products = await response.json();
+
+    return products;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return [];
+  }
+};
