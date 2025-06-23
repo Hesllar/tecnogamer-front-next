@@ -22,12 +22,16 @@ export const NavItems = ({ id, name, subCategories = [] }: Props) => {
 
   const [itemActive, setItemActive] = useState<number | null>(null);
 
+  const handleClick = () => {
+    router.push(formattedName);
+  };
+
   return (
     <div
       className="relative inline-block p-5 cursor-pointer hover:shadow-2xl hover:backdrop-blur-3xl"
       onMouseEnter={() => setItemActive(+id)}
       onMouseLeave={() => setItemActive(null)}
-      onClick={() => router.push(formattedName)}
+      onClick={handleClick}
     >
       <span
         className={`font-semibold text-lg text-white uppercase max-[891px]:text-sm`}

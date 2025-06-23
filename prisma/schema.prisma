@@ -64,6 +64,7 @@ model product {
   images         Json?           @default("[]")
   specifications Json?
   namenormalized String?         @db.VarChar
+  is_active      Boolean?        @default(true)
   order_item     order_item[]
   brand          brand?          @relation(fields: [brand_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   category       category?       @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)

@@ -30,6 +30,7 @@ export interface Product {
   stock?: number;
   category?: Category;
   brand?: Brand;
+  is_active: boolean;
 }
 
 export interface Price {

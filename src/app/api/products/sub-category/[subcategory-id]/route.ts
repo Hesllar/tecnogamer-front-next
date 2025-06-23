@@ -36,6 +36,7 @@ export async function GET(request: Request, { params }: Segments) {
     namenormalized: product.namenormalized,
     price: product.price,
     images: product.images,
+    is_active: product.is_active,
   }));
   return NextResponse.json(productsMapper);
 }

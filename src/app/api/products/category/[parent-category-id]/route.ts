@@ -31,7 +31,8 @@ export async function GET(request: Request, { params }: Segments) {
       p.name,
       p.price,
       p.images,
-      p.namenormalized
+      p.namenormalized,
+      p.is_active
     from product p 
     inner join category c on c.id  = p.category_id 
     inner join category c2 on c.parent_category_id  = c2.id
@@ -45,7 +46,8 @@ export async function GET(request: Request, { params }: Segments) {
       p.name,
       p.price,
       p.images,
-      p.namenormalized
+      p.namenormalized,
+      p.is_active
     from product p 
     where p.category_id= ${+parentCategoryId}
     `;

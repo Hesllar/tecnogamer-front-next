@@ -10,6 +10,7 @@ export const ProductItem = ({
   price,
   images,
   category,
+  is_active,
 }: Product) => {
   const productNameFormatted = (namenormalized ?? name)
     .toLowerCase()
@@ -23,13 +24,9 @@ export const ProductItem = ({
     <div className="flex flex-col bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
       <Link
         href={
-          category?.is_active
-            ? `${categoryNameFormatted}/${productNameFormatted}`
-            : "#"
+          is_active ? `${categoryNameFormatted}/${productNameFormatted}` : "#"
         }
-        className={
-          category?.is_active ? "cursor-pointer" : "cursor-not-allowed"
-        }
+        className={is_active ? "cursor-pointer" : "cursor-not-allowed"}
       >
         <div className="w-full flex justify-center items-center h-[250px]">
           <Image

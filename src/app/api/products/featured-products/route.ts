@@ -16,7 +16,8 @@ export async function GET(request: Request) {
     p.id, p."name", 
     p.price, 
     p.images,
-    c."name" as category_name
+    c."name" as category_name,
+    p.is_active
   from product p
   inner join order_item oi on p.id = oi.product_id
   inner join category c on c.id = p.category_id 
