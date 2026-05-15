@@ -1,58 +1,59 @@
 "use client";
-
-import { Category } from "@/categories/interfaces";
+import { useState } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 
-import { useRouter } from "next/navigation";
+import { Category } from "@/categories/interfaces";
 import { NavSubItem } from "./NavSubItem";
-import { useState } from "react";
 
 interface Props {
-  id: string;
-  name: string;
-  image: string;
-  is_active: boolean;
+  id?: string;
+  name?: string;
+  image?: string;
+  is_active?: boolean;
   subCategories?: Category[];
 }
 
 export const NavItems = ({ id, name, subCategories = [] }: Props) => {
-  const router = useRouter();
-
-  const formattedName = `/products/${name.replaceAll(" ", "-").toLowerCase()}`;
+  const formattedName = `/products/${name!.replaceAll(" ", "-").toLowerCase()}`;
 
   const [itemActive, setItemActive] = useState<number | null>(null);
-
-  const handleClick = () => {
-    router.push(formattedName);
-  };
 
   return (
     <div
       className="relative inline-block p-5 cursor-pointer hover:shadow-2xl hover:backdrop-blur-3xl"
-      onMouseEnter={() => setItemActive(+id)}
+      onMouseEnter={() => setItemActive(+id!)}
       onMouseLeave={() => setItemActive(null)}
-      onClick={handleClick}
     >
-      <span
-        className={`font-semibold text-lg text-white uppercase max-[891px]:text-sm`}
+      <Link
+        className="font-semibold text-lg text-white uppercase max-[891px]:text-sm"
+        href={formattedName}
       >
         {name}
-      </span>
+      </Link>
 
+      {/* Dropdown de subcategorías */}
       {subCategories.length > 0 && (
         <div
           className={clsx(
-            "absolute right-0 z-10 mt-5 w-full origin-top-right rounded-b-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ",
+            "absolute left-0 top-full w-full min-w-max z-10 transition-all duration-300 ease-in-out",
+            "bg-gradient-to-b from-cyan-800 to-cyan-900",
+            "border border-cyan-700 rounded-b-lg shadow-xl shadow-cyan-900/50",
+            "backdrop-blur-sm",
             {
-              "block bg-cyan-900": itemActive, // Show the dropdown if the item is active
-              hidden: !itemActive, // Hide the dropdown if the item is not active
+              "opacity-100 visible translate-y-0": itemActive === +id!,
+              "opacity-0 invisible -translate-y-2": itemActive !== +id!,
             }
           )}
-          id="dropdown1"
         >
-          <div className="py-1" role="none">
+          <div className="py-2">
             {subCategories.map(({ id, name }) => (
-              <NavSubItem key={+id} id={+id} name={name} />
+              <NavSubItem
+                key={+id!}
+                id={+id!}
+                name={name}
+                url={formattedName}
+              />
             ))}
           </div>
         </div>

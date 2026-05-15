@@ -25,7 +25,7 @@ export default async function ProductPage() {
             <Link href={`/products/${name.replaceAll(" ", "-").toLowerCase()}`}>
               <div className="w-full flex justify-center items-center">
                 <Image
-                  src={image}
+                  src={image ?? ""}
                   alt={name}
                   width={450}
                   height={450}

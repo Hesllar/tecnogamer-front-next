@@ -67,7 +67,7 @@ export const ProductsGrid = ({ products = [] }: Props) => {
       if (!filterProduct.categoryId) return;
 
       productsAPI
-        .getProductsBySubCategoryId(filterProduct.categoryId)
+        .getProductsBySubCategory(filterProduct.categoryId)
         .then((data) => {
           setInitialProducts(data);
         })

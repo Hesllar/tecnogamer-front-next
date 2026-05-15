@@ -24,7 +24,9 @@ export const ProductItem = ({
     <div className="flex flex-col bg-white shadow-md rounded-lg max-w-xs items-center h-[450px] dark:bg-zinc-800">
       <Link
         href={
-          is_active ? `${categoryNameFormatted}/${productNameFormatted}` : "#"
+          is_active
+            ? `/products/${categoryNameFormatted}/${productNameFormatted}`
+            : "#"
         }
         className={is_active ? "cursor-pointer" : "cursor-not-allowed"}
       >

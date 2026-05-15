@@ -11,7 +11,10 @@ interface Props {
 export const Breadcrumbs = ({ customLabels }: Props) => {
   const pathname = usePathname();
 
-  let pathSegments = pathname.split("/").filter((segment) => segment);
+  let pathSegments = pathname
+    .split("/")
+    .filter((segment) => segment)
+    .filter((segment) => segment !== "sub-category");
 
   // No muestra nada si no hay segmentos de ruta por ejemplo en la ruta raíz
   if (pathSegments.length === 0) return;

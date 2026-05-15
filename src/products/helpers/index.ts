@@ -141,14 +141,20 @@ export const getProductsByParentCategoryId = async (
   }
 };
 
-export const getProductsBySubCategoryId = async (
-  subCategory: number
+export const getProductsBySubCategory = async (
+  subCategory: number | string,
+  isClient = false
 ): Promise<Product[]> => {
   try {
-    const response = await fetch(`/api/products/sub-category/${subCategory}`);
+    let url = `/api/products/sub-category/${subCategory}`;
+
+    if (!isClient) {
+      url = `${env.BASE_URL}/api/products/sub-category/${subCategory}`;
+    }
+    const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("Error fetching featured products by sub category ID");
+      throw new Error("Error fetching featured products by sub category");
     }
 
     const products = await response.json();

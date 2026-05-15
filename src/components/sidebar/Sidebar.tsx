@@ -1,22 +1,21 @@
 "use client";
 
-import { FaArrowLeft, FaMemory } from "react-icons/fa";
-import { SidebarMenuItem } from "./SidebarMenuItem";
-
-import { IoMdCube, IoIosKeypad } from "react-icons/io";
-import { useUIStore } from "@/store/ui/ui-store";
-import clsx from "clsx";
-import { Category } from "@/categories/interfaces";
+import { FaMemory } from "react-icons/fa";
 import { BsGpuCard } from "react-icons/bs";
 import { GiProcessor } from "react-icons/gi";
 import { PiComputerTower } from "react-icons/pi";
+import clsx from "clsx";
+
+import { useUIStore } from "@/store/ui/ui-store";
+import { SidebarMenuItem } from "./SidebarMenuItem";
+import { Category } from "@/categories/interfaces";
 
 interface Props {
   categories: {
-    id: string;
+    id?: string;
     name: string;
-    image: string;
-    is_active: boolean;
+    image?: string;
+    is_active?: boolean;
     subCategory?: Category[];
   }[];
 }

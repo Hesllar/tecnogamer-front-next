@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   const addSubCategories = getCategories.map(async (category) => {
     const subCategories = await categoryAPI.getSubCategoriesByParentId(
-      +category.id
+      +category.id!
     );
     return {
       ...category,

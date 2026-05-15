@@ -3,10 +3,10 @@ import { NavItems } from "./NavItems";
 
 interface Props {
   categories: {
-    id: string;
+    id?: string;
     name: string;
-    image: string;
-    is_active: boolean;
+    image?: string;
+    is_active?: boolean;
     subCategories?: Category[];
   }[];
 }
